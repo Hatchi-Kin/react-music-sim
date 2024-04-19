@@ -15,7 +15,6 @@ const ListItem: React.FC<ListItemProps> = ({ image, name, href }) => {
   const router = useRouter();
 
   const onClick = () => {
-    //add auth before push
     router.push(href);
   };
 

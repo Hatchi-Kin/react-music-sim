@@ -4,6 +4,7 @@ import React, { useMemo } from "react";
 import { usePathname } from "next/navigation";
 import { HiHome } from "react-icons/hi";
 import { BiHeadphone, BiDice5 } from "react-icons/bi";
+import { LiaDiceD6Solid } from "react-icons/lia";
 import Box from "@/components/Box";
 import Sidebaritem from "@/components/Sidebaritem";
 import Library from "@/components/Library";
@@ -20,19 +21,19 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
       {
         icon: HiHome,
         label: "Home",
-        active: pathname !== "/random-song",
+        active: pathname == "/homepage",
         href: "/homepage",
       },
       {
-        icon: BiDice5,
+        icon: LiaDiceD6Solid,
         label: "Random Song",
-        active: pathname === "/suggestion",
-        href: "/homepage/suggestion",
+        active: pathname === "/random-song",
+        href: "/homepage/random-song",
       },
       {
         icon: BiHeadphone,
-        label: "Artist",
-        active: pathname === "/suggestion",
+        label: "List all Artists",
+        active: pathname === "/byartist",
         href: "/homepage/byartist",
       },
     ],

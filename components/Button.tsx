@@ -1,7 +1,6 @@
 import { forwardRef } from "react";
 import { twMerge } from "tailwind-merge";
 import React from "react";
-import { cva } from "class-variance-authority";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 

@@ -28,7 +28,7 @@ const Sidebaritem: React.FC<SidebaritemProps> = ({
             h-auto
             w-full
             gap-x-4
-            text-md
+            text-xl
             font-medium
             hover:text-white
             transition

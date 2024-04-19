@@ -6,7 +6,6 @@ import Link from "next/link";
 const font = Montserrat({ weight: "600", subsets: ["latin"] });
 
 export const Landingnavbar = () => {
-    
   return (
     <nav className="p-7 bg-transparent flex items-center justify-center ">
       <Link href="/" className={"flex"}>

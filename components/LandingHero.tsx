@@ -5,7 +5,7 @@ import Button from "./Button";
 
 export const Landinghero = () => {
   const isSignedIn = false;
-  
+
   return (
     <div className={"text-white font-bold py-36 text-center space-y-5"}>
       <div

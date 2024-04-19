@@ -1,31 +1,26 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Card } from "@/components/ui/card";
-import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const ArtistList = () => {
+  // State variables for artists, loading status, error message, and current page
   const [artists, setArtists] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const router = useRouter();
+  const [page, setPage] = useState(1);
+  const itemsPerPage = 33;
 
+  // Function to fetch artists from the API
   const fetchArtist = useCallback(() => {
     setIsLoading(true);
-    const token = localStorage.getItem("authToken") ?? ""; // Get token from local storage
-
-    // Logging all local storage key-value pairs for debugging purposes
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
-      // @ts-ignore
-      const value = localStorage.getItem(key) ?? "";
-      console.log(`${key}: ${value}`);
-    }
-    console.log(`Token used for request: ${token}`);
+    const token = localStorage.getItem("authToken") ?? "";
 
     fetch("https://api.music-sim.fr/music_library/artists", {
       method: "GET",
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer ${token}`, // Use token in Authorization header
+        Authorization: `Bearer ${token}`,
       },
     })
       .then((response) => {
@@ -52,47 +47,109 @@ const ArtistList = () => {
       .catch((error) => {
         setError(error.message);
         setIsLoading(false);
-        if (error.message.includes("401")) {
-          // Checking specifically for authorization errors
-          router.push("/sign-in"); // Redirect to sign-in page if unauthorized
-        }
+        window.location.href = "/sign-in";
       });
-  }, [router]);
+  }, []);
 
+  // Fetch artists when the component mounts
   useEffect(() => {
     fetchArtist();
   }, [fetchArtist]);
 
+  // Function to handle clicking the "Next" button
+  const handleNextPage = () => {
+    setPage((prevPage) => {
+      const nextPage = prevPage + 1;
+      if (nextPage > Math.ceil(artists.length / itemsPerPage)) {
+        return 1;
+      }
+      return nextPage;
+    });
+  };
+
+  // Function to handle clicking the "Prev" button
+  const handlePrevPage = () => {
+    setPage((prevPage) => {
+      const newPrevPage = prevPage - 1;
+      if (newPrevPage < 1) {
+        return Math.ceil(artists.length / itemsPerPage);
+      }
+      return newPrevPage;
+    });
+  };
+
+  // Show loading or error message if necessary
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
+  // Calculate which artists to display on the current page
+  const startIndex = (page - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const artistsToDisplay = artists.slice(startIndex, endIndex);
+
+  // Render the component
   return (
     <div>
+      {/* Navigation buttons */}
+      <div className="flex justify-center space-x-4 mt-6 mb-4">
+        <Button
+          onClick={handlePrevPage}
+          className="bg-sky-700 hover:bg-sky-600 text-white font-bold py-4 px-8 rounded flex items-center"
+        >
+          <FaArrowLeft className="mr-2" /> Prev
+        </Button>
+        <Button
+          onClick={handleNextPage}
+          className="bg-sky-700 hover:bg-sky-600 text-white font-bold py-4 px-8 rounded flex items-center"
+        >
+          Next <FaArrowRight className="ml-2" />
+        </Button>
+      </div>
+      {/* Artist cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-5 p-7">
-        {artists.length > 0 ? (
-          artists.map((artist, index) => (
+        {artistsToDisplay.length > 0 ? (
+          artistsToDisplay.map((artist, index) => (
             <div key={index} className="block">
               <Card
                 className="
-              bg-[#111827] 
-              rounded-lg 
-              border-gray-700 
-              text-white 
-              shadow-lg 
-              p-4 
-              hover:bg-gradient-to-r 
-              from-sky-800 
-              to-sky-600 
-              transition-colors 
-              duration-300"
+            bg-[#111827] 
+            rounded-lg 
+            ml-2
+            mr-2
+            border-gray-700 
+            text-white 
+            shadow-lg 
+            p-4 
+            hover:bg-gradient-to-r 
+            from-sky-800 
+            to-sky-600 
+            transition-colors 
+            duration-300"
               >
-                <h3 className="text-lg font-bold p-2">{artist}</h3>
+                <h3 className="text-lg ml-6 font-bold p-2 overflow-hidden text-overflow-ellipsis whitespace-nowrap">
+                  {artist}
+                </h3>
               </Card>
             </div>
           ))
         ) : (
           <p>No artists available</p>
         )}
+      </div>
+      {/* Navigation buttons */}
+      <div className="flex justify-center space-x-4 mt-4 mb-12">
+        <Button
+          onClick={handlePrevPage}
+          className="bg-sky-700 hover:bg-sky-600 text-white font-bold py-4 px-8 rounded flex items-center"
+        >
+          <FaArrowLeft className="mr-2" /> Prev
+        </Button>
+        <Button
+          onClick={handleNextPage}
+          className="bg-sky-700 hover:bg-sky-600 text-white font-bold py-4 px-8 rounded flex items-center"
+        >
+          Next <FaArrowRight className="ml-2" />
+        </Button>
       </div>
     </div>
   );

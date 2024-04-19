@@ -5,7 +5,7 @@ import { twMerge } from "tailwind-merge";
 import { RxCaretLeft, RxCaretRight } from "react-icons/rx";
 import { HiHome } from "react-icons/hi";
 import { BiSearch } from "react-icons/bi";
-import { FaUserAlt } from "react-icons/fa";
+import { FaUserAltSlash } from "react-icons/fa";
 import React from "react";
 import Button from "./Button";
 
@@ -18,13 +18,16 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
   const router = useRouter();
 
   const handlelogout = () => {
+    // Remove the API key from local storage and redirect to the login page
+    localStorage.removeItem('authToken');
     router.push("/");
   };
+
   return (
     <div
       className={twMerge(
         `
-        h-fit bg-gradient-to-b from-sky-600 p-6 
+        h-fit bg-gradient-to-b from-slate-800 p-6 
         `,
         className
       )}
@@ -55,12 +58,12 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
           <Button
             onClick={handlelogout}
             className={twMerge(`
-            flex items-center space-x-2  border-2 border-white text-white rounded-xl px-4 py-2 hover:bg-indigo-800 transition
+            flex items-center space-x-2  border-2 border-white text-white rounded-xl px-4 py-2 hover:bg-indigo-950 transition
           `)}
           >
             <div>Logout</div>
             <div>
-              <FaUserAlt />
+              <FaUserAltSlash />
             </div>
           </Button>
         </div>
@@ -106,4 +109,5 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
     </div>
   );
 };
+
 export default Header;
