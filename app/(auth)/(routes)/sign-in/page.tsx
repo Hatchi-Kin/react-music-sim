@@ -10,25 +10,33 @@ import { Label } from '@/components/ui/label';
 export default function LoginPage() {
   const router = useRouter();
 
-
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
-    const email = formData.get('email');
-    const password = formData.get('password');
+    const email = formData.get("email");
+    const password = formData.get("password");
 
-    const response = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
+    if (email === null || password === null) {
+      throw new Error("Email or password is missing");
+    }
+
+    const params = new URLSearchParams();
+    params.append("username", email as string);
+    params.append("password", password as string);
+
+    const response = await fetch("https://api.music-sim.fr/auth/token", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: params,
     });
 
     if (response.ok) {
       router.push('/homepage');
     } else {
-      // Handle errors
-      console.error('Login failed');
+      const errorData = await response.json();
+      console.error('Login failed', errorData);
+      // Now handle the errorData, show it to the user if appropriate
     }
   }
 

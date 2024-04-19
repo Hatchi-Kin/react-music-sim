@@ -26,7 +26,8 @@ const Header: React.FC<HeaderProps> = ({
     const router = useRouter();
 
     const handlelogout = () => {
-        // logout();
+
+        router.push('/');
     }
     return (
         <div className={twMerge(`
@@ -66,21 +67,6 @@ const Header: React.FC<HeaderProps> = ({
                         <FaUserAlt/>
                     </Button>
                 </div>
-
-                <div className={twMerge(`flex-col justify-end gap-x-4`)}>
-
-                    <div>
-                            <Button className="bg-transparent text-neutral-300 font-medium px-4" >
-                                Sign up
-                            </Button>
-                        </div>
-                        <div>
-                            <Button className="bg-white px-4 py-2" >
-                                Log in
-                            </Button>
-                        </div>
-                </div>
-
             </div>
             <div className={twMerge(`
             flex justify-between items-center
