@@ -71,7 +71,7 @@ const ArtistList = () => {
             </button>
             <div className="mt-5 p-7">
                 <Card
-                    className="bg-white rounded-lg border-none text-black shadow-lg p-4">
+                    className="bg-white rounded-md border-none text-black shadow-lg-white p-4">
                     <h3 className="text-lg font-bold p-2">
                         {artist.artist} - {artist.title}
                     </h3>
