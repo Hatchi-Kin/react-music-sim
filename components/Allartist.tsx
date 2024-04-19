@@ -65,7 +65,7 @@ const ArtistList = () => {
                 {artists.length > 0 ? (
                     artists.map((artist, index) => (
                         <div key={index} className="block">
-                            <Card className="bg-[#111827] rounded-lg border-none text-white shadow-lg p-4 hover:bg-gradient-to-r from-blue-500 to-emerald-600 transition-colors duration-300">
+                            <Card className="bg-[#111827] rounded-lg border-gray-400 text-white shadow-lg p-4 hover:bg-gradient-to-r from-teal-800 to-teal-200 transition-colors duration-300">
                                 <h3 className="text-lg font-bold p-2">
                                     {artist}
                                 </h3>

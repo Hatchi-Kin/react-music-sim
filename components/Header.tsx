@@ -32,7 +32,7 @@ const Header: React.FC<HeaderProps> = ({
     }
     return (
         <div className={twMerge(`
-        h-fit bg-gradient-to-b from-pink-800 p-6 
+        h-fit bg-gradient-to-b from-sky-600 p-6 
         `
             , className
         )}>
@@ -62,7 +62,7 @@ const Header: React.FC<HeaderProps> = ({
                     <Button
                         onClick={handlelogout}
                         className={twMerge(`
-                            bg-pink-600 border-2 border-white text-white rounded-xl px-4 py-2 hover:opacity-75 transition
+                            bg-sky-400 border-2 border-white text-white rounded-xl px-4 py-2 hover:opacity-75 transition
                             `)}>
                         Logout
                         <FaUserAlt/>
