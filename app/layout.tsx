@@ -2,10 +2,6 @@ import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
 import "./globals.css";
 import React from "react";
-import Sidebar from "@/components/Sidebar";
-import { useRouter } from "next/navigation";
-
-
 
 const font = Figtree({ subsets: ["latin"] });
 

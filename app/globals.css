@@ -6,11 +6,12 @@ html,
 body,
 :root {
   height: 100%;
+  background-color: black;
 }
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 0 100% 100%;
     --foreground: 222.2 47.4% 11.2%;
 
     --muted: 210 40% 96.1%;
@@ -76,15 +77,15 @@ body,
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
-  }
-}
+/*@layer base {*/
+/*  * {*/
+/*    @apply border-border;*/
+/*  }*/
+/*  body {*/
+/*    @apply bg-background text-foreground;*/
+/*    font-feature-settings: "rlig" 1, "calt" 1;*/
+/*  }*/
+/*}*/
 
 .invert-logo {
   filter: invert(100%);
