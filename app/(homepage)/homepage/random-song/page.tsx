@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import Header from "@/components/Header";
 
 
-import ArtistRandom from "@/components/Artistrandom";
+import RandomSong from "@/components/RandomSong";
 export default function ListArtistPage() {
     const router = useRouter();
 
@@ -26,7 +26,7 @@ export default function ListArtistPage() {
             <Header>
                 Headers
             </Header>
-            <ArtistRandom />
+            <RandomSong />
 
         </div>
     );

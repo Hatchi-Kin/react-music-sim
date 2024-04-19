@@ -10,12 +10,14 @@ export const metadata: Metadata = {
   description: "make your own music similarity playlist",
 };
 
-export default function LandingLayout({ children }: { children: React.ReactNode; }) {
+export default function LandingLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
-      <body className={font.className}>
-        {children}
-      </body>
+      <body className={font.className}>{children}</body>
     </html>
   );
 }
