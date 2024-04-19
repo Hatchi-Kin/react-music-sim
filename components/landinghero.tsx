@@ -18,7 +18,7 @@ export const Landinghero = () => {
                     la music a portée de clic
             </div>
             <div className={"flex justify-center h-full"}>
-                <div className={"flex  flex-col space-y-5"}>
+                <div className={"flex flex-col space-y-5"}>
                     <Link href={isSignedIn ? "/dashboard" : "/sign-in"}>
                         <Button  className=" text-center ">
                             Sign In
