@@ -2,6 +2,10 @@
 
 import { FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
+import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
+import {Label} from "@/components/ui/label";
+import {Input} from "@/components/ui/input";
+import {Button} from "@/components/ui/button";
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -35,11 +39,32 @@ export default function SignUpPage() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="email" name="email" placeholder="Email" required />
-      <input type="password" name="password" placeholder="Password" required />
-      <input type="password" name="confirmPassword" placeholder="Confirm Password" required />
-      <button type="submit">Sign Up</button>
-    </form>
+    <Card className="w-[350px]">
+      <CardHeader>
+        <CardTitle>SIGN-UP</CardTitle>
+        <CardDescription>Please enter your credentials to register</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleSubmit}>
+          <div className="grid w-full items-center gap-4">
+            <div className="flex flex-col space-y-1.5">
+              <Label htmlFor="email">Email</Label>
+              <Input id="email" name="email" type="email" placeholder="your email" required/>
+            </div>
+            <div className="flex flex-col space-y-1.5">
+              <Label htmlFor="password">Password</Label>
+              <Input id="password" name="password" type="password" placeholder="your password" required/>
+            </div>
+            <div className="flex flex-col space-y-1.5">
+              <Label htmlFor="password"> confirm Password</Label>
+              <Input id="password" name="password" type="password" placeholder="confirm password" required/>
+            </div>
+          </div>
+          <CardFooter className="flex justify-center mt-4">
+            <Button type="submit" variant="outline">Submit</Button>
+          </CardFooter>
+        </form>
+      </CardContent>
+    </Card>
   );
 }
