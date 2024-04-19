@@ -34,12 +34,12 @@ export const Landinghero = () => {
       <div className={"flex justify-center h-full"}>
         <div className={"flex flex-col space-y-5"}>
           <Link href={isSignedIn ? "/dashboard" : "/sign-in"}>
-            <Button className="px-10 py-5 text-center text-xl text-white bg-blue-500 hover:bg-blue-700 rounded">
+            <Button className="px-10 py-5 text-center text-xl text-white bg-blue-400 hover:bg-blue-600 rounded">
               Sign In
             </Button>
           </Link>
           <Link href={isSignedIn ? "/dashboard" : "/sign-up"}>
-            <Button className="px-10 py-5 text-center text-xl text-white bg-green-500 hover:bg-green-700 rounded">
+            <Button className="px-10 py-5 text-center text-xl text-white bg-green-700 hover:bg-green-500 rounded">
               Sign Up
             </Button>
           </Link>
