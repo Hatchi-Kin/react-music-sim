@@ -3,8 +3,10 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## pour installer Next
 `npm install -g next`
-## pour creer l'app
+## pour creer un projet NextJS
 `npx create-next-app@latest`
+## pour ajouter shadcn
+`npx shadcn-ui@latest init`
 
 ## Getting Started
 
