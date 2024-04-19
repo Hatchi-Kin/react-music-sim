@@ -3,7 +3,8 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Header from "@/components/Header";
 
-import  ArtistList  from "@/components/Artistlist";
+
+import ArtistRandom from "@/components/Artistrandom";
 export default function ListArtistPage() {
     const router = useRouter();
 
@@ -25,7 +26,7 @@ export default function ListArtistPage() {
             <Header>
                 Headers
             </Header>
-            <ArtistList />
+            <ArtistRandom />
 
         </div>
     );

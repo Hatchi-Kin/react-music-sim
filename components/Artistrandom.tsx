@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { Card } from '@/components/ui/card';
 
 
-const ArtistList = () => {
+const ArtistRandom = () => {
     const [artist, setArtist] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -84,4 +84,4 @@ const ArtistList = () => {
     );
 }
 
-export default ArtistList;
+export default ArtistRandom;

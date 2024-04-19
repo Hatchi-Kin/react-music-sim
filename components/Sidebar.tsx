@@ -22,13 +22,19 @@ const Sidebar: React.FC<SidebarProps> =
             icon:HiHome,
             label: 'Home',
             active:pathname !== '/suggestion',
-            href: '/',
+            href: '/homepage',
         },
         {
             icon: BiSearch,
             label: 'Search',
             active:pathname === '/suggestion',
-            href: '/suggestion',
+            href: '/homepage/suggestion',
+        },
+        {
+            icon: BiBox,
+            label: 'Artist',
+            active:pathname === '/suggestion',
+            href: '/homepage/byartist',
         }
     ], [pathname]);
   return (

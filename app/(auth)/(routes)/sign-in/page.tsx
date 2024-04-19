@@ -37,7 +37,7 @@ export default function LoginPage() {
 
   if (response.ok) {
         const data = await response.json();
-        localStorage.setItem('authToken', data.token); // Enregistrement du token dans localStorage
+        localStorage.setItem('authToken', data.access_token); // Enregistrement du token dans localStorage
         router.push('/homepage');
       } else {
         const errorData = await response.json();

@@ -1,3 +1,33 @@
-// si tu veux rajouter une page par artiste, tu peux copier le code ci-dessus et le modifier pour qu'il corresponde à ta page
+'use client';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import Header from "@/components/Header";
 
-// t'as cru que j'allais te donner la solution ? 😂
+
+import ArtistList from "@/components/Allartist";
+export default function ListArtistPage() {
+    const router = useRouter();
+
+    useEffect(() => {
+        const token = localStorage.getItem('authToken');
+        if (!token) {
+            router.push('/sign-in');
+        }
+    }, [router]);
+
+    return (
+        <div className="
+          bg-neutral-900
+          h-full
+          w-full
+          overflow-hidden
+          overflow-y-auto
+          ">
+            <Header>
+                Headers
+            </Header>
+            <ArtistList />
+
+        </div>
+    );
+}
