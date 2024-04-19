@@ -17,12 +17,19 @@ export const Landinghero = () => {
             <div className={"text-sm md:text-xl font-light text-zinc-400 "}>
                     la music a portée de clic
             </div>
-            <div>
-                    <Link href={isSignedIn ? "/dashboard" : "/sign-up"}>
-                        <Button  className="md:text_lg p-4 md:p-6 rounded-full font-semibold">
-                            Commence Maintenant !
+            <div className={"flex justify-center h-full"}>
+                <div className={"flex  flex-col space-y-5"}>
+                    <Link href={isSignedIn ? "/dashboard" : "/sign-in"}>
+                        <Button  className=" text-center ">
+                            Sign In
                         </Button>
                     </Link>
+                    <Link href={isSignedIn ? "/dashboard" : "/sign-up"}>
+                        <Button  className=" text-center">
+                            Sign Up
+                        </Button>
+                    </Link>
+                </div>
             </div>
             <div className={"text-sm md:text-xl font-light text-zinc-400 "}>
                     pas de carte de crédit requise.
