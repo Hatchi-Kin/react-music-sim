@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEvent } from 'react';
+import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import {Label} from "@/components/ui/label";
@@ -9,6 +9,7 @@ import {Button} from "@/components/ui/button";
 
 export default function SignUpPage() {
   const router = useRouter();
+  const [error, setError] = useState('');
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -17,24 +18,23 @@ export default function SignUpPage() {
     const email = formData.get('email');
     const password = formData.get('password');
     const confirmPassword = formData.get('confirmPassword');
-    // Vous pouvez ajouter des champs supplémentaires si nécessaire
 
     if (password !== confirmPassword) {
-      // Gérez l'erreur de confirmation du mot de passe
+      setError('Passwords do not match.');
       return;
     }
 
-    const response = await fetch('/api/auth/signup', {
+    const response = await fetch('https://api.music-sim.fr/auth/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
     });
 
     if (response.ok) {
-      // Vous pouvez rediriger l'utilisateur vers la page de connexion ou directement vers leur profil
       router.push('/sign-in');
     } else {
-      // Gérez les erreurs de réponse, par exemple un email déjà utilisé
+      const result = await response.json();
+      setError(result.message || 'An error occurred. Please try again.');
     }
   }
 
@@ -46,6 +46,7 @@ export default function SignUpPage() {
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit}>
+          {error && <p className="text-red-500">{error}</p>}
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="email">Email</Label>
@@ -56,8 +57,8 @@ export default function SignUpPage() {
               <Input id="password" name="password" type="password" placeholder="your password" required/>
             </div>
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="password"> confirm Password</Label>
-              <Input id="password" name="password" type="password" placeholder="confirm password" required/>
+              <Label htmlFor="confirmPassword">Confirm Password</Label>
+              <Input id="confirmPassword" name="confirmPassword" type="password" placeholder="confirm password" required/>
             </div>
           </div>
           <CardFooter className="flex justify-center mt-4">

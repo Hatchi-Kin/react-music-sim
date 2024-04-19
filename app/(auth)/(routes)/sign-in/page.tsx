@@ -1,7 +1,7 @@
 'use client';
 
-import { FormEvent } from 'react';
-import { useRouter } from 'next/navigation'; // Make sure the import path is correct
+import { FormEvent, useState } from 'react';
+import { useRouter } from 'next/navigation'; // Corrected import path
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -9,16 +9,20 @@ import { Label } from '@/components/ui/label';
 
 export default function LoginPage() {
   const router = useRouter();
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
+    setLoading(true);
     const formData = new FormData(event.currentTarget);
     const email = formData.get("email");
     const password = formData.get("password");
 
     if (email === null || password === null) {
-      throw new Error("Email or password is missing");
+      setError("Email or password is missing");
+      setLoading(false);
+      return;
     }
 
     const params = new URLSearchParams();
@@ -31,14 +35,16 @@ export default function LoginPage() {
       body: params,
     });
 
-    if (response.ok) {
-      router.push('/homepage');
-    } else {
-      const errorData = await response.json();
-      console.error('Login failed', errorData);
-      // Now handle the errorData, show it to the user if appropriate
+  if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem('authToken', data.token); // Enregistrement du token dans localStorage
+        router.push('/homepage');
+      } else {
+        const errorData = await response.json();
+        setError('Login failed: ' + (errorData.message || 'Unknown error'));
+      }
+      setLoading(false);
     }
-  }
 
   return (
     <Card className="w-[350px]">
@@ -48,6 +54,7 @@ export default function LoginPage() {
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit}>
+          {error && <p className="text-red-500">{error}</p>}
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="email">Email</Label>
@@ -59,7 +66,7 @@ export default function LoginPage() {
             </div>
           </div>
           <CardFooter className="flex justify-center mt-4">
-            <Button type="submit" variant="outline">Submit</Button>
+            <Button type="submit" variant="outline" disabled={loading}>{loading ? 'Loading...' : 'Submit'}</Button>
           </CardFooter>
         </form>
       </CardContent>
