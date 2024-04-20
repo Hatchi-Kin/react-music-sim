@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
 import MusicSimImage from "@/components/MusicSimImage";
+import ParticleRing from "@/components/ParticuleRing";
 
 export default function Home() {
   const router = useRouter();
@@ -26,7 +27,7 @@ export default function Home() {
       "
     >
       <Header>Headers</Header>
-      <MusicSimImage className="mt-6" />
+      <ParticleRing />
     </div>
   );
 }

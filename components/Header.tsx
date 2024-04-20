@@ -37,7 +37,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
           <div className={twMerge(`flex-col justify-start gap-x-4`)}>
             <button
               className={twMerge(`
-                                border-2 justify-center bg-white rounded-full flex p-2 hover:opacity-75 transition
+                                border-2 md:hidden justify-center bg-white rounded-full flex p-2 hover:opacity-75 transition
                                 `)}
             >
               <HiHome className={twMerge(`text-black`)} size={20} />
@@ -46,7 +46,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
           <div className={twMerge(`flex-col justify-start gap-x-4`)}>
             <button
               className={twMerge(`
-                                border-2 justify-center bg-white rounded-full flex p-2 hover:opacity-75 transition
+                                border-2  md:hidden justify-center bg-white rounded-full flex p-2 hover:opacity-75 transition
                                 `)}
             >
               <BiSearch className={twMerge(`text-black`)} size={20} />
@@ -83,7 +83,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
         >
           <p
             className={twMerge(`
-                    text-white font-bold text-2xl p-4
+                    text-white md:hidden font-bold text-2xl p-4
                     `)}
           >
             Music Similarity
@@ -92,7 +92,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
             onClick={() => {
               router.back();
             }}
-            className={"rounded-full bg-black flex items-center"}
+            className={"rounded-full md:hidden bg-black flex items-center"}
           >
             <RxCaretLeft className={twMerge(`text-white`)} size={35} />
           </button>
@@ -100,7 +100,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
             onClick={() => {
               router.forward();
             }}
-            className={"rounded-full bg-black flex items-center"}
+            className={"rounded-full md:hidden bg-black flex items-center"}
           >
             <RxCaretRight className={twMerge(`text-white`)} size={35} />
           </button>
