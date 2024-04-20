@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
+import MusicSimImage from "@/components/MusicSimImage";
 
 export default function Home() {
   const router = useRouter();
@@ -17,7 +18,7 @@ export default function Home() {
   return (
     <div
       className="
-      bg-neutral-900
+      bg-slate-950
       h-full
       w-full
       overflow-hidden
@@ -25,6 +26,7 @@ export default function Home() {
       "
     >
       <Header>Headers</Header>
+      <MusicSimImage className="mt-6" />
     </div>
   );
 }

@@ -20,7 +20,8 @@ const RandomSongCard = () => {
   // Function to fetch a random song from the API
   const fetchRandomSong = useCallback(() => {
     setIsLoading(true);
-    fetch("https://api.music-sim.fr/music_library/random", {
+    const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+    fetch(`${baseUrl}/music_library/random`, {
       method: "GET",
       headers: {
         Accept: "application/json",

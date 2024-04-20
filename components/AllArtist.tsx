@@ -15,8 +15,9 @@ const ArtistList = () => {
   const fetchArtist = useCallback(() => {
     setIsLoading(true);
     const token = localStorage.getItem("authToken") ?? "";
+    const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-    fetch("https://api.music-sim.fr/music_library/artists", {
+    fetch(`${baseUrl}/music_library/artists`, {
       method: "GET",
       headers: {
         Accept: "application/json",
