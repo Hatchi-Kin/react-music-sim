@@ -80,8 +80,8 @@ const ArtistList = () => {
   };
 
   // Show loading or error message if necessary
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (isLoading) return <div className="text-white">Loading...</div>;
+  if (error) return <div className="text-white">Error: {error}</div>;
 
   // Calculate which artists to display on the current page
   const startIndex = (page - 1) * itemsPerPage;
@@ -118,7 +118,7 @@ const ArtistList = () => {
             ml-2
             mr-2
             border-gray-700 
-            text-white 
+            text-slate-300 
             shadow-lg 
             p-4 
             hover:bg-gradient-to-r 

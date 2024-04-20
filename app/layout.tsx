@@ -7,7 +7,7 @@ const font = Figtree({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Music Similiarity",
-  description: "make your own music similarity playlist",
+  description: "Browse music by similarity",
 };
 
 export default function LandingLayout({

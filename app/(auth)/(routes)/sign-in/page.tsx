@@ -24,6 +24,7 @@ export default function LoginPage() {
     setLoading(true);
     const formData = new FormData(event.currentTarget);
     const email = formData.get("email");
+    const emailAsString = email as string;
     const password = formData.get("password");
 
     if (email === null || password === null) {
@@ -33,10 +34,11 @@ export default function LoginPage() {
     }
 
     const params = new URLSearchParams();
-    params.append("username", email as string);
+    params.append("username", emailAsString);
     params.append("password", password as string);
-
-    const response = await fetch("https://api.music-sim.fr/auth/token", {
+    
+    const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+    const response = await fetch(`${baseUrl}/auth/token`, {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: params,
@@ -45,6 +47,8 @@ export default function LoginPage() {
     if (response.ok) {
       const data = await response.json();
       localStorage.setItem("authToken", data.access_token); // Enregistrement du token dans localStorage
+      const displayName = emailAsString.split("@")[0];
+      localStorage.setItem("displayName", displayName);
       router.push("/homepage");
     } else {
       const errorData = await response.json();

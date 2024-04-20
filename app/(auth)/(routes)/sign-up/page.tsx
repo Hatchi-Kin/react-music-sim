@@ -30,8 +30,8 @@ export default function SignUpPage() {
       setError("Passwords do not match.");
       return;
     }
-
-    const response = await fetch("https://api.music-sim.fr/auth/register", {
+    const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+    const response = await fetch(`${baseUrl}/auth/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),

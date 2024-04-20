@@ -3,7 +3,6 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
-import MusicSimImage from "@/components/MusicSimImage";
 import ParticleRing from "@/components/ParticuleRing";
 
 export default function Home() {
@@ -23,11 +22,14 @@ export default function Home() {
       h-full
       w-full
       overflow-hidden
-      overflow-y-auto
+      flex
+      flex-col
       "
     >
       <Header>Headers</Header>
-      <ParticleRing />
+      <div className="overflow-hidden flex-grow">
+        <ParticleRing />
+      </div>
     </div>
   );
 }
