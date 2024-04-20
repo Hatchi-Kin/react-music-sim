@@ -6,10 +6,10 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 const MIN_RADIUS = 7.5;
-const MAX_RADIUS = 15;
-const DEPTH = 2;
-const LEFT_COLOR = "1150FF";
-const RIGHT_COLOR = "111827";
+const MAX_RADIUS = 16;
+const DEPTH = 6;
+const LEFT_COLOR = "2148a0";
+const RIGHT_COLOR = "2a5b7e";
 const NUM_POINTS = 2500;
 
 interface Point {
