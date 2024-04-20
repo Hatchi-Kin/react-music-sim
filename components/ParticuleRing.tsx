@@ -50,7 +50,8 @@ const ParticleRing: React.FC = () => (
             <PointCircle />
         </Canvas>
         <h1 className="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] text-slate-200 font-medium text-2xl md:text-5xl pointer-events-none">
-            Welcome To The Music Visualizer
+            Welcome To The
+            Music Similarity App
         </h1>
     </div>
 );
