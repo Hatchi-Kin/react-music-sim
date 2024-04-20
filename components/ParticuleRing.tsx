@@ -49,7 +49,7 @@ const ParticleRing: React.FC = () => (
             <pointLight position={[-30, 0, -30]} power={10.0} />
             <PointCircle />
         </Canvas>
-        <h1 className="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] text-slate-200 font-medium text-2xl md:text-5xl pointer-events-none">
+        <h1 className="absolute top-[40%] left-[50%] -translate-x-[50%] -translate-y-[50%] text-slate-200 font-medium text-2xl md:text-5xl pointer-events-none">
             Welcome To The
             Music Similarity App
         </h1>
