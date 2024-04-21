@@ -36,7 +36,7 @@ export default function LoginPage() {
     const params = new URLSearchParams();
     params.append("username", emailAsString);
     params.append("password", password as string);
-    
+
     const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
     const response = await fetch(`${baseUrl}/auth/token`, {
       method: "POST",
@@ -47,8 +47,6 @@ export default function LoginPage() {
     if (response.ok) {
       const data = await response.json();
       localStorage.setItem("authToken", data.access_token); // Enregistrement du token dans localStorage
-      const displayName = emailAsString.split("@")[0];
-      localStorage.setItem("displayName", displayName);
       router.push("/homepage");
     } else {
       const errorData = await response.json();
@@ -61,9 +59,7 @@ export default function LoginPage() {
     <Card className="w-[350px]">
       <CardHeader>
         <CardTitle>SIGN-IN</CardTitle>
-        <CardDescription>
-          Please enter your credentials to register
-        </CardDescription>
+        <CardDescription>Please enter your credentials to register</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit}>
@@ -71,13 +67,7 @@ export default function LoginPage() {
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="your email"
-                required
-              />
+              <Input id="email" name="email" type="email" placeholder="your email" required />
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="password">Password</Label>

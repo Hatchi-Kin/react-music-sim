@@ -49,9 +49,7 @@ export default function SignUpPage() {
     <Card className="w-[350px]">
       <CardHeader>
         <CardTitle>SIGN-UP</CardTitle>
-        <CardDescription>
-          Please enter your credentials to register
-        </CardDescription>
+        <CardDescription>Please enter your credentials to register</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit}>
@@ -59,13 +57,7 @@ export default function SignUpPage() {
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="your email"
-                required
-              />
+              <Input id="email" name="email" type="email" placeholder="your email" required />
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="password">Password</Label>

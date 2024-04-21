@@ -26,22 +26,16 @@ const ArtistList = () => {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error(
-            `Network response was not ok: ${response.statusText}`
-          );
+          throw new Error(`Network response was not ok: ${response.statusText}`);
         }
         return response.json();
       })
       .then((data) => {
         if (Array.isArray(data)) {
-          const cleanedData = data.map((artist: string) =>
-            artist.replace("MegaSet/", "")
-          );
+          const cleanedData = data.map((artist: string) => artist.replace("MegaSet/", ""));
           setArtists(cleanedData);
         } else {
-          throw new Error(
-            "Data format is incorrect, expected an array of strings"
-          );
+          throw new Error("Data format is incorrect, expected an array of strings");
         }
         setIsLoading(false);
       })
