@@ -42,7 +42,7 @@ const ParticleRing: React.FC = () => (
     <Canvas
       camera={{ position: [10, -7.5, -5] }}
       style={{ height: "100vh" }}
-      className="bg-black w-full h-full"
+      className="bg-slate-950 w-full h-full"
     >
       <OrbitControls maxDistance={20} minDistance={10} />
       <directionalLight />

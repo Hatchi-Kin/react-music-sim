@@ -9,7 +9,7 @@ const MIN_RADIUS = 7.5;
 const MAX_RADIUS = 16;
 const DEPTH = 6;
 const LEFT_COLOR = "2456ba";
-const RIGHT_COLOR = "1b2946";
+const RIGHT_COLOR = "1f2f50";
 const NUM_POINTS = 2500;
 
 interface Point {
