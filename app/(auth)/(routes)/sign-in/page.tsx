@@ -24,6 +24,7 @@ export default function LoginPage() {
     setLoading(true);
     const formData = new FormData(event.currentTarget);
     const email = formData.get("email");
+    const emailAsString = email as string;
     const password = formData.get("password");
 
     if (email === null || password === null) {
@@ -33,10 +34,11 @@ export default function LoginPage() {
     }
 
     const params = new URLSearchParams();
-    params.append("username", email as string);
+    params.append("username", emailAsString);
     params.append("password", password as string);
 
-    const response = await fetch("https://api.music-sim.fr/auth/token", {
+    const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+    const response = await fetch(`${baseUrl}/auth/token`, {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: params,
@@ -57,9 +59,7 @@ export default function LoginPage() {
     <Card className="w-[350px]">
       <CardHeader>
         <CardTitle>SIGN-IN</CardTitle>
-        <CardDescription>
-          Please enter your credentials to register
-        </CardDescription>
+        <CardDescription>Please enter your credentials to register</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit}>
@@ -67,13 +67,7 @@ export default function LoginPage() {
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="your email"
-                required
-              />
+              <Input id="email" name="email" type="email" placeholder="your email" required />
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="password">Password</Label>

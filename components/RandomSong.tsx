@@ -49,9 +49,9 @@ const RandomSongCard = () => {
   }, [fetchRandomSong]);
 
   // Show loading or error message if necessary
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
-  if (!song) return <div>No song found</div>;
+  if (isLoading) return <div className="text-white">Loading...</div>;
+  if (error) return <div className="text-white">Error: {error}</div>;
+  if (!song) return <div className="text-white">No song found</div>;
 
   // Render the component
   return (
@@ -59,7 +59,7 @@ const RandomSongCard = () => {
       {/* Button to fetch a new random song */}
       <button
         onClick={fetchRandomSong}
-        className="mt-5 mb-4 p-4 bg-sky-600 hover:bg-sky-800 text-white font-bold text-lg rounded flex justify-center items-center space-x-2"
+        className="mt-5 mb-4 p-4 bg-sky-600 hover:bg-sky-800 text-slate-300 font-bold text-lg rounded flex justify-center items-center space-x-2"
       >
         <GiPerspectiveDiceSixFacesRandom className="mr-3" size={24} />
         Refresh Song
@@ -67,7 +67,7 @@ const RandomSongCard = () => {
       </button>
       {/* Display the current song */}
       <div className="mt-4 p-8 w-full max-w-2xl">
-        <Card className="bg-[#141b2c] rounded-lg border-gray-700  text-white shadow-lg p-14 w-full">
+        <Card className="bg-[#141b2c] rounded-lg border-gray-700  text-slate-300 shadow-lg p-14 w-full">
           <h3 className="text-3xl font-bold p-2">
             {song.artist} - {song.title}
           </h3>
