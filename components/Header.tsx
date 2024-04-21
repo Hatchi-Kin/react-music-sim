@@ -36,7 +36,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
                   border-2 md:hidden justify-center bg-slate-400 rounded-full flex p-2 hover:opacity-75 transition
                   `)}
               >
-                <HiHome className={twMerge(`text-black`)} size={20} />
+                <HiHome className={twMerge(`text-black`)} size={30} />
               </button>
             </Link>
           </div>
@@ -47,7 +47,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
                   border-2  md:hidden justify-center bg-slate-400 rounded-full flex p-2 hover:opacity-75 transition
                   `)}
               >
-                <LiaDiceD6Solid className={twMerge(`text-black`)} size={20} />
+                <LiaDiceD6Solid className={twMerge(`text-black`)} size={30} />
               </button>
             </Link>
           </div>
@@ -58,7 +58,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
                   border-2  md:hidden justify-center bg-slate-400 rounded-full flex p-2 hover:opacity-75 transition
                   `)}
               >
-                <BiHeadphone className={twMerge(`text-black`)} size={20} />
+                <BiHeadphone className={twMerge(`text-black`)} size={30} />
               </button>
             </Link>
           </div>
