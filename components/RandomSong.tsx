@@ -55,26 +55,51 @@ const RandomSongCard = () => {
 
   // Render the component
   return (
-    <div className="flex flex-col items-center mt-20">
-      {/* Button to fetch a new random song */}
-      <button
-        onClick={fetchRandomSong}
-        className="mt-5 mb-4 p-4 bg-sky-600 hover:bg-sky-800 text-slate-300 font-bold text-lg rounded flex justify-center items-center space-x-2"
-      >
-        <GiPerspectiveDiceSixFacesRandom className="mr-3" size={24} />
-        Refresh Song
-        <GiPerspectiveDiceSixFacesRandom className="ml-3" size={24} />
-      </button>
-      {/* Display the current song */}
-      <div className="mt-4 p-8 w-full max-w-2xl">
-        <Card className="bg-[#141b2c] rounded-lg border-gray-700  text-slate-300 shadow-lg p-14 w-full">
-          <h3 className="text-3xl font-bold p-2">
-            {song.artist} - {song.title}
-          </h3>
-          <p className="text-xl p-2 mt-2">
-            Album: {song.album}, Track: {song.tracknumber}, Year: {song.year}
-          </p>
-        </Card>
+    <div>
+      <div>
+        <h1
+          className="
+          text-slate-300 
+          text-4xl 
+          mb-6 
+          ml-20 
+          font-bold 
+          tracking-wide 
+          uppercase 
+          bg-gradient-to-r 
+          from-sky-800 via-sky-500 to-sky-200  
+          bg-clip-text 
+          text-transparent"
+        >
+          Get a Random Song to listen to
+        </h1>
+      </div>
+      <div className="flex flex-col items-center mt-20">
+        {/* Button to fetch a new random song */}
+        <button
+          onClick={fetchRandomSong}
+          className="
+            mt-5 mb-4 p-4 
+            bg-sky-600 hover:bg-sky-800 text-slate-300 
+            font-bold text-lg 
+            rounded 
+            flex justify-center items-center space-x-2"
+        >
+          <GiPerspectiveDiceSixFacesRandom className="mr-3" size={24} />
+          Refresh Song
+          <GiPerspectiveDiceSixFacesRandom className="ml-3" size={24} />
+        </button>
+        {/* Display the current song */}
+        <div className="mt-4 p-8 w-full max-w-2xl">
+          <Card className="bg-[#141b2c] rounded-lg border-gray-700  text-slate-300 shadow-lg p-14 w-full">
+            <h3 className="text-3xl font-bold p-2">
+              {song.artist} - {song.title}
+            </h3>
+            <p className="text-xl p-2 mt-2">
+              Album: {song.album}, Track: {song.tracknumber}, Year: {song.year}
+            </p>
+          </Card>
+        </div>
       </div>
     </div>
   );

@@ -9,16 +9,17 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    # Adds the SSH host key to the known hosts file
     - name: Add SSH host key
       run: |
         mkdir -p ~/.ssh
         echo "${{ secrets.PI_SSH_KNOWN_HOST_KEY }}" >> ~/.ssh/known_hosts
 
+    # Copies the files to Raspberry Pi
     - name: Copy files to Raspberry Pi
       uses: appleboy/scp-action@master
       with:
@@ -29,6 +30,7 @@ jobs:
         source: "."
         target: "/home/pi/Documents/react-music-sim"
 
+    # Deploys the application on your Raspberry Pi
     - name: Deploy to Raspberry Pi on main branch push
       if: success()
       uses: appleboy/ssh-action@master
@@ -38,9 +40,12 @@ jobs:
         key: ${{ secrets.PI_SSH_PRIVATE_KEY }}
         port: ${{ secrets.SSH_PI_PORT }}
         script: |
+          # Navigate to the correct directory
           cd /home/pi/Documents/react-music-sim
+          # If the Docker Compose service is already running, restart it
           if docker ps | grep -q 'react-music-sim-web'; then
             docker compose restart
+          # If the Docker Compose service is not running, start it
           else
             docker compose up -d
           fi

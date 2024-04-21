@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import Link from "next/link";
 
 const ArtistList = () => {
   // State variables for artists, loading status, error message, and current page
@@ -85,6 +86,22 @@ const ArtistList = () => {
   // Render the component
   return (
     <div>
+      <h1
+        className="
+          text-slate-300 
+          text-4xl 
+          mb-6 
+          ml-20 
+          font-bold 
+          tracking-wide 
+          uppercase 
+          bg-gradient-to-r 
+          from-sky-800 via-sky-500 to-sky-200  
+          bg-clip-text 
+          text-transparent"
+      >
+        All Artists in MegaSet
+      </h1>
       {/* Navigation buttons */}
       <div className="flex justify-center space-x-4 mt-6 mb-4">
         <Button
@@ -104,28 +121,29 @@ const ArtistList = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-5 p-7">
         {artistsToDisplay.length > 0 ? (
           artistsToDisplay.map((artist, index) => (
-            <div key={index} className="block">
+            // Include the artist's name as a URL parameter
+            <Link href={`/homepage/albumsByArtist?page=${encodeURIComponent(artist)}`} key={index}>
               <Card
                 className="
-            bg-[#111827] 
-            rounded-lg 
-            ml-2
-            mr-2
-            border-gray-700 
-            text-slate-300 
-            shadow-lg 
-            p-4 
-            hover:bg-gradient-to-r 
-            from-sky-800 
-            to-sky-600 
-            transition-colors 
-            duration-300"
+                  bg-[#111827] 
+                  rounded-lg 
+                  ml-2
+                  mr-2
+                  border-gray-700 
+                  text-slate-300 
+                  shadow-lg 
+                  p-4 
+                  hover:bg-gradient-to-r 
+                  from-sky-800 
+                  to-sky-600 
+                  transition-colors 
+                  duration-300"
               >
                 <h3 className="text-lg ml-6 font-bold p-2 overflow-hidden text-overflow-ellipsis whitespace-nowrap">
                   {artist}
                 </h3>
               </Card>
-            </div>
+            </Link>
           ))
         ) : (
           <p>No artists available</p>
