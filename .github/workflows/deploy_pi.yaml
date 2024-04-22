@@ -42,10 +42,9 @@ jobs:
         script: |
           # Navigate to the correct directory
           cd /home/pi/Documents/react-music-sim
-          # If the Docker Compose service is already running, restart it
+          # Stop the Docker Compose services if they're running
           if docker ps | grep -q 'react-music-sim-web'; then
-            docker compose restart
-          # If the Docker Compose service is not running, start it
-          else
-            docker compose up -d
+            docker compose down
           fi
+          # Build the Docker image and start the services
+          docker compose up --build -d
