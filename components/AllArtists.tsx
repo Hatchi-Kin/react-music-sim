@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import Link from "next/link";
+import { useArtist } from "../contexts/ArtistContext"; // adjust the path according to your project structure
 
 const ArtistList = () => {
   // State variables for artists, loading status, error message, and current page
@@ -11,6 +12,8 @@ const ArtistList = () => {
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
   const itemsPerPage = 33;
+
+  const { setArtistName } = useArtist(); // hook to get the setArtistName function
 
   // Function to fetch artists from the API
   const fetchArtist = useCallback(() => {
@@ -124,6 +127,7 @@ const ArtistList = () => {
             // Include the artist's name as a URL parameter
             <Link href={`/homepage/albumsByArtist?page=${encodeURIComponent(artist)}`} key={index}>
               <Card
+                onClick={() => setArtistName(artist)} // set the artist name when the card is clicked
                 className="
                   bg-[#111827] 
                   rounded-lg 

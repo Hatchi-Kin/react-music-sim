@@ -1,12 +1,16 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import url("https://fonts.googleapis.com/css2?family=Figtree&display=swap");
 
 html,
 body,
 :root {
   height: 100%;
   background-color: #111827;
+  font-family: "Figtree", sans-serif;
+  font-weight: 300;
+  font-size: 15px;
 }
 
 @layer base {
@@ -76,7 +80,6 @@ body,
     --radius: 0.5rem;
   }
 }
-
 
 .invert-logo {
   filter: invert(100%);

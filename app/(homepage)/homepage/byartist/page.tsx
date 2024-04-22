@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
-import ArtistList from "@/components/AllArtist";
+import ArtistList from "@/components/AllArtists";
 
 export default function ListArtistPage() {
   const router = useRouter();
