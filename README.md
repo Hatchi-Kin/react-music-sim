@@ -91,3 +91,17 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 ├── tailwind.config.ts
 └── README.md
 ```
+
+## Le workflow gh action
+
+pour que le pi puisse ssh into gh
+
+creer un fichier config dans `/home/pi/.ssh/config` avec:
+```
+Host github-megapi
+	HostName github.com 
+    AddKeysToAgent yes 
+    PreferredAuthentications publickey 
+    IdentityFile ~/.ssh/id_ed25519_gh_megapi
+```
+et une clé privée nommé `id_ed25519_gh_megapi`
