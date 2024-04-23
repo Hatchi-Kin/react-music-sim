@@ -57,11 +57,12 @@ export default function SignUpPage() {
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="email">Email</Label>
-              <Input id="email" name="email" type="email" placeholder="your email" required />
+              <Input className={"bg-white"} id="email" name="email" type="email" placeholder="your email" required />
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="password">Password</Label>
               <Input
+                className={"bg-white"}
                 id="password"
                 name="password"
                 type="password"
@@ -72,6 +73,7 @@ export default function SignUpPage() {
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="confirmPassword">Confirm Password</Label>
               <Input
+                  className={"bg-white"}
                 id="confirmPassword"
                 name="confirmPassword"
                 type="password"
