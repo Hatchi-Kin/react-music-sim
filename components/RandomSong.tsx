@@ -84,7 +84,7 @@ const RandomSongCard = () => {
             </p>
           </Card>
         </div>
-          <AddToPlayListButton song_full_path={song.filepath} />
+          <AddToPlayListButton song_full_path={song.filepath} size="large" />
       </div>
     </div>
   );
