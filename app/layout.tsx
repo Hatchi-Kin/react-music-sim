@@ -3,6 +3,7 @@ import React from "react";
 import { ArtistProvider } from "../contexts/ArtistProvider";
 import { AlbumProvider } from "../contexts/AlbumProvider";
 import { SimilarSongsProvider } from "../contexts/SimilarSongsProvider";
+import { PlayListProvider } from "../contexts/PlayListProvider";
 
 interface Metadata {
   title: string;
@@ -20,7 +21,9 @@ export default function LandingLayout({ children }: { children: React.ReactNode 
       <body>
         <ArtistProvider>
           <AlbumProvider>
-            <SimilarSongsProvider>{children}</SimilarSongsProvider>
+            <SimilarSongsProvider>
+              <PlayListProvider>{children}</PlayListProvider>
+            </SimilarSongsProvider>
           </AlbumProvider>
         </ArtistProvider>
       </body>

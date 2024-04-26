@@ -24,7 +24,6 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 ```bash
 .
 ├── app
-│   │
 │   ├── (auth)
 │   │   └── (routes)
 │   │       ├── layout.tsx
@@ -54,6 +53,7 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 │   └──globals.css
 │
 ├── components
+│   ├── AddToPlayList.tsx
 │   ├── AlbumsByArtist.tsx
 │   ├── AllArtist.tsx
 │   ├── Box.tsx
@@ -61,9 +61,8 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 │   ├── Header.tsx
 │   ├── LandingHero.tsx
 │   ├── LandingNavbar.tsx
-│   ├── Library.tsx
 │   ├── ListItem.tsx
-│   ├── MusicSimImage.tsx
+│   ├── MusicPlayer.tsx
 │   ├── ParticuleRing.tsx
 │   ├── RandomSong.tsx
 │   ├── Sidebaritem.tsx
@@ -74,6 +73,16 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 │       ├── input.tsx
 │       ├── label.tsx
 │       └── select.tsx
+│
+├── contexts
+│   ├── AlbumContext.tsx
+│   ├── AlbumProvider.tsx
+│   ├── ArtistContext.tsx
+│   ├── ArtistProvider.tsx
+│   ├── PlayListContext.tsx
+│   ├── PlayListProvider.tsx
+│   ├── SimilarSongsContext.tsx
+│   └──SimilarSongsProvider.tsx
 │
 ├── lib
 │   └── utils.ts

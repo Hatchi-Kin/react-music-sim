@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { Card } from "@/components/ui/card";
 import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi";
+import AddToPlayListButton from "@/components/AddToPlayList";
 
 // Define the shape of a song object
 export interface Song {
@@ -9,6 +10,7 @@ export interface Song {
   album: string;
   tracknumber: string;
   year: string;
+  filepath: string;
 }
 
 const RandomSongCard = () => {
@@ -82,6 +84,7 @@ const RandomSongCard = () => {
             </p>
           </Card>
         </div>
+          <AddToPlayListButton song_full_path={song.filepath} />
       </div>
     </div>
   );

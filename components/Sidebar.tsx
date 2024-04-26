@@ -7,7 +7,7 @@ import { BiHeadphone, BiDice5 } from "react-icons/bi";
 import { LiaDiceD6Solid } from "react-icons/lia";
 import Box from "@/components/Box";
 import Sidebaritem from "@/components/Sidebaritem";
-import Library from "@/components/Library";
+import MusicPlayer from "@/components/MusicPlayer";
 
 interface SidebarProps {
   children: React.ReactNode;
@@ -48,7 +48,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
           ))}
         </Box>
         <Box className={"overflow-y-auto h-full bg-[#111827]"}>
-          <Library />
+          <MusicPlayer />
         </Box>
       </div>
       <main className={"flex-1 h-full overflow-y-auto py-2"}>{children}</main>
