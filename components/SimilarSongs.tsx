@@ -67,8 +67,10 @@ const SimilarSongs = () => {
 
   return (
     <div>
-      <h1 className="text-slate-300 text-4xl mb-6 ml-20 font-bold tracking-wide uppercase 
-                      bg-gradient-to-r from-sky-800 via-sky-600 to-sky-200 bg-clip-text text-transparent">
+      <h1
+        className="text-slate-300 text-4xl mb-6 ml-20 font-bold tracking-wide uppercase 
+                    bg-gradient-to-r from-sky-800 via-sky-600 to-sky-200 bg-clip-text text-transparent"
+      >
         Similar songs of <span className="text-sky-500 font-extrabold">{trackName}</span> by{" "}
         <span className="text-sky-500 font-extrabold">{artistName}</span>
       </h1>
@@ -85,11 +87,17 @@ const SimilarSongs = () => {
                 <Link href="/homepage/similar-songs">
                   <div className="absolute inset-0" onClick={() => setsongPath(song.path)}>
                     <div className="flex justify-between items-center">
-                      <h3 className="text-lg font-bold text-slate-400">{song.title}</h3>
+                      <h3 className="text-lg font-bold text-slate-400 overflow-ellipsis overflow-hidden whitespace-nowrap max-w-xs">
+                        {song.title}
+                      </h3>
                     </div>
                     <div className="flex justify-between items-center mt-4">
-                      <p className="flex-grow ml-6">{song.artist}</p>
-                      <p className="flex-grow mr-6">{song.album}</p>
+                      <p className="flex-grow ml-6 overflow-ellipsis overflow-hidden whitespace-nowrap max-w-xs">
+                        {song.artist}
+                      </p>
+                      <p className="flex-grow mr-6 overflow-ellipsis overflow-hidden whitespace-nowrap max-w-xs">
+                        {song.album}
+                      </p>
                     </div>
                   </div>
                 </Link>
