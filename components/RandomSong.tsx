@@ -22,11 +22,15 @@ const RandomSongCard = () => {
   // Function to fetch a random song from the API
   const fetchRandomSong = useCallback(() => {
     setIsLoading(true);
+    const token = localStorage.getItem("authToken") ?? "";
     const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+    
     fetch(`${baseUrl}/music_library/random`, {
       method: "GET",
       headers: {
         Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
       },
     })
       .then((response) => {

@@ -22,11 +22,10 @@ const AddToPlayListButton: React.FC<AddToPlayListButtonProps> = ({
       addSong(song_full_path);
     }
   };
-
-  const buttonClass =
-  size === "small"
-    ? "bg-sky-400 hover:bg-green-400 text-indigo-800 font-bold py-0.5 px-1 text-xs rounded"
-    : "bg-sky-400 hover:bg-green-400 text-indigo-800 font-bold py-3 px-6 text-base rounded";
+  
+  const buttonClass = isInPlaylist
+  ? `bg-[#b38e4e] hover:bg-[#a67641] text-slate-300 font-bold ${size === "small" ? "py-0.5 px-1 text-xs" : "py-3 px-6 text-base"} rounded`
+  : `bg-[#46994f] hover:bg-[#287331] text-slate-300 font-bold ${size === "small" ? "py-0.5 px-1 text-xs" : "py-3 px-6 text-base"} rounded`;
 
     return (
       <button onClick={handleClick} className={buttonClass}>

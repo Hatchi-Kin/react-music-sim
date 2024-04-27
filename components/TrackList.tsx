@@ -3,6 +3,7 @@ import { useAlbum } from "../contexts/AlbumContext";
 import { useArtist } from "../contexts/ArtistContext";
 import { useSimilarSongs } from "../contexts/SimilarSongsContext";
 import { Card } from "@/components/ui/card";
+import AddToPlayListButton from "@/components/AddToPlayList";
 import Link from "next/link";
 
 interface Track {
@@ -63,20 +64,9 @@ const TracksForAlbum = () => {
 
   return (
     <div>
-      <h1
-        className="
-          text-slate-300 
-          text-4xl 
-          mb-6 ml-20 
-          font-bold 
-          tracking-wide 
-          uppercase 
-          bg-gradient-to-r 
-          from-sky-800 via-sky-500 to-sky-200 
-          bg-clip-text 
-          text-transparent"
-      >
-        All tracks for {albumName} of {artistName}
+      <h1 className="text-slate-300 text-4xl mb-6 ml-20 font-bold tracking-wide uppercase bg-gradient-to-r from-sky-800 via-sky-600 to-sky-200 bg-clip-text text-transparent">
+        All tracks for <span className="text-sky-500 font-extrabold">{albumName}</span> of{" "}
+        <span className="text-sky-500 font-extrabold">{artistName}</span>
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mt-8 p-7">
         {tracks.length > 0 ? (
@@ -85,26 +75,14 @@ const TracksForAlbum = () => {
               <Card
                 onClick={() => setsongPath(track.path)}
                 key={index}
-                className="
-                  bg-[#111827] 
-                  rounded-lg 
-                  ml-2
-                  mr-2
-                  border-gray-700 
-                  text-slate-300 
-                  shadow-lg 
-                  p-4 
-                  hover:bg-gradient-to-r 
-                  from-sky-800 
-                  to-sky-600 
-                  transition-colors 
-                  duration-300"
+                className="bg-[#111827] rounded-lg ml-2 mr-2 border-gray-700 text-slate-300 shadow-lg p-4 hover:bg-gradient-to-r from-sky-800 to-sky-600 transition-colors h-28"
               >
-                <h3 className="text-lg ml-6 font-bold p-2 overflow-hidden text-overflow-ellipsis whitespace-nowrap">
-                  {track.tracknumber}. {track.title}
-                  {/* Uncomment the line below if you want to display the path */}
-                  {/* <p>{track.path}</p> */}
-                </h3>
+                <div className="flex justify-between items-center">
+                  <h3 className="text-lg font-bold text-slate-400">
+                    {track.tracknumber}. {track.title}
+                  </h3>
+                  <AddToPlayListButton song_full_path={track.path} size="small" />
+                </div>
               </Card>
             </Link>
           ))

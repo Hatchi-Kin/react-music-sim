@@ -12,7 +12,7 @@ export const PlayListProvider: React.FC<PlayListProviderProps> = ({ children }) 
 
   const addSong = (song: string) => {
     setPlaylist((prevPlaylist) => {
-      if (prevPlaylist.length >= 6) {
+      if (prevPlaylist.length >= 8) {
         return [...prevPlaylist.slice(1), song]; // Remove the first song and add the new one
       } else {
         return [...prevPlaylist, song]; // Add the new song

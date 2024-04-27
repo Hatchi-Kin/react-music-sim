@@ -113,7 +113,7 @@ const MusicPlayer = () => {
         </button>
         {songUrl && <audio ref={audioRef} src={songUrl} onEnded={handleSongEnd} />}
       </div>
-      <div className="w-full max-w-md mx-auto bg-slate-800 rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+      <div className="w-full p-1 max-w-md mx-auto overflow-hidden md:max-w-2xl">
         {playlist.length > 0 ? (
           playlist.map((song, index) => {
             const songName = song.split("/").pop()?.replace(".mp3", "") || "";
@@ -129,27 +129,27 @@ const MusicPlayer = () => {
                   }
                 }}
                 className={`
-                bg-[#111827] 
-                rounded-lg 
-                ml-2
-                mr-2
-                border-gray-700 
-                text-slate-300 
-                shadow-lg 
-                p-2
-                hover:bg-gradient-to-r 
-                from-sky-800 
-                to-sky-600 
-                transition-colors 
-                ${index === currentSongIndex ? "bg-sky-800" : ""}
-                duration-100`}
+              bg-[#111827] 
+              rounded-lg 
+              ml-2
+              mr-2
+              border-gray-700 
+              text-slate-300 
+              shadow-lg 
+              p-2
+              hover:bg-gradient-to-r 
+              from-sky-800 
+              to-sky-600 
+              transition-colors 
+              ${index === currentSongIndex ? "bg-sky-800" : ""}
+              duration-100`}
               >
-                <div className="p-4 flex flex-col h-24 justify-between">
+                <div className="p-4 flex flex-col h-16 justify-between">
                   <div className="flex items-center justify-between">
                     <div className="text-xs font-semibold overflow-ellipsis overflow-hidden whitespace-nowrap flex-grow">
                       <div className="prose text-xs text-slate-300">{songName}</div>
                     </div>
-                    <div className="ml-1">
+                    <div className="ml-2 flex-shrink-0">
                       <AddToPlayListButton song_full_path={song} size="small" />
                     </div>
                   </div>

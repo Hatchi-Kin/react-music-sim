@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useSimilarSongs } from "../contexts/SimilarSongsContext";
 import { useArtist } from "../contexts/ArtistContext";
 import { Card } from "@/components/ui/card";
+import AddToPlayListButton from "@/components/AddToPlayList";
 import Link from "next/link";
 
 interface Song {
@@ -67,20 +68,7 @@ const SimilarSongs = () => {
 
   return (
     <div>
-      <h1
-        className="
-    text-slate-300 
-    text-4xl 
-    mb-6 
-    ml-20 
-    font-bold 
-    tracking-wide 
-    uppercase 
-    bg-gradient-to-r 
-    from-sky-800 via-sky-600 to-sky-200  
-    bg-clip-text 
-    text-transparent"
-      >
+      <h1 className="text-slate-300 text-4xl mb-6 ml-20 font-bold tracking-wide uppercase bg-gradient-to-r from-sky-800 via-sky-600 to-sky-200 bg-clip-text text-transparent">
         Similar songs of <span className="text-sky-500 font-extrabold">{trackName}</span> by{" "}
         <span className="text-sky-500 font-extrabold">{artistName}</span>
       </h1>
@@ -92,27 +80,16 @@ const SimilarSongs = () => {
               <Card
                 onClick={() => setsongPath(song.path)}
                 key={index}
-                className="
-                bg-[#111827] 
-                rounded-lg 
-                ml-2
-                mr-2
-                border-gray-700 
-                text-slate-300 
-                shadow-lg 
-                p-4 
-                hover:bg-gradient-to-r 
-                from-sky-800 
-                to-sky-600 
-                transition-colors 
-                duration-300"
+                className="bg-[#111827] rounded-lg ml-2 mr-2 border-gray-700 text-slate-300 shadow-lg p-4 hover:bg-gradient-to-r from-sky-800 to-sky-600 transition-colors h-32"
               >
-                <h3 className="text-lg ml-6 font-bold p-2 overflow-hidden text-overflow-ellipsis whitespace-nowrap">
-                  {song.title}
-                </h3>
-                <p className="ml-6">
-                  {song.artist} - {song.album}
-                </p>
+                <div className="flex justify-between items-center">
+                  <h3 className="text-lg font-bold text-slate-400">{song.title}</h3>
+                  <AddToPlayListButton song_full_path={song.path} size="small" />
+                </div>
+                <div className="flex justify-between items-center mt-4">
+                  <p className="flex-grow ml-6">{song.artist}</p>
+                  <p className="flex-grow mr-6">{song.album}</p>
+                </div>
               </Card>
             </Link>
           ))
