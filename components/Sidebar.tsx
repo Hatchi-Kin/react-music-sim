@@ -3,7 +3,7 @@
 import React, { useMemo } from "react";
 import { usePathname } from "next/navigation";
 import { HiHome } from "react-icons/hi";
-import { BiHeadphone, BiDice5 } from "react-icons/bi";
+import { BiHeadphone, BiDice3 } from "react-icons/bi";
 import { LiaDiceD6Solid } from "react-icons/lia";
 import Box from "@/components/Box";
 import Sidebaritem from "@/components/Sidebaritem";
@@ -31,11 +31,18 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
         href: "/homepage/random-song",
       },
       {
+        icon: BiDice3,
+        label: "Random Spotinite",
+        active: pathname === "/homepage/random-spotinite",
+        href: "/homepage/random-spotinite",
+      },
+      {
         icon: BiHeadphone,
         label: "List all Artists",
         active: pathname === "/homepage/byartist",
         href: "/homepage/byartist",
-      },
+      }
+
     ],
     [pathname]
   );

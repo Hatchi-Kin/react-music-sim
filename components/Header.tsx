@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 import { HiHome } from "react-icons/hi";
-import { BiHeadphone } from "react-icons/bi";
+import { BiHeadphone, BiDice3 } from "react-icons/bi";
 import { LiaDiceD6Solid } from "react-icons/lia";
 import { FaUserAltSlash } from "react-icons/fa";
 import React from "react";
@@ -27,7 +27,6 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
   return (
     <div className={twMerge(`h-fit bg-gradient-to-b from-slate-800 p-6`, className)}>
       <div className={twMerge(`flex justify-between gap-x-4 items-center`)}>
-
         <div className={twMerge(`flex items-center gap-x-4`)}>
           <div className={twMerge(`flex-col justify-start gap-x-4`)}>
             <Link href="/homepage">
@@ -48,6 +47,17 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
                   `)}
               >
                 <LiaDiceD6Solid className={twMerge(`text-black`)} size={30} />
+              </button>
+            </Link>
+          </div>
+          <div className={twMerge(`flex-col justify-start gap-x-4`)}>
+            <Link href="/homepage/random-spotinite">
+              <button
+                className={twMerge(`
+                  border-2 md:hidden justify-center bg-slate-400 rounded-full flex p-2 hover:opacity-75 transition
+                `)}
+              >
+                <BiDice3 className={twMerge(`text-black`)} size={30} />
               </button>
             </Link>
           </div>
