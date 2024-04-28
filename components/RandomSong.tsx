@@ -5,12 +5,15 @@ import AddToPlayListButton from "@/components/AddToPlayList";
 
 // Define the shape of a song object
 export interface Song {
-  artist: string;
-  title: string;
-  album: string;
-  tracknumber: string;
-  year: string;
-  filepath: string;
+  row: {
+    artist: string;
+    title: string;
+    album: string;
+    tracknumber: string;
+    year: string;
+    filepath: string;
+  };
+  lyrics: string;
 }
 
 const RandomSongCard = () => {
@@ -24,8 +27,8 @@ const RandomSongCard = () => {
     setIsLoading(true);
     const token = localStorage.getItem("authToken") ?? "";
     const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-    
-    fetch(`${baseUrl}/music_library/random`, {
+
+    fetch(`${baseUrl}/lyrics/random-lyrics`, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -40,7 +43,7 @@ const RandomSongCard = () => {
         return response.json();
       })
       .then((data) => {
-        setSong(data.row);
+        setSong(data);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -59,11 +62,9 @@ const RandomSongCard = () => {
   if (error) return <div className="text-white">Error: {error}</div>;
   if (!song) return <div className="text-white">No song found</div>;
 
-  // Render the component
   return (
     <div>
       <div className="flex flex-col items-center mt-20">
-        {/* Button to fetch a new random song */}
         <button
           onClick={fetchRandomSong}
           className="
@@ -81,15 +82,35 @@ const RandomSongCard = () => {
         <div className="mt-4 p-8 w-full max-w-2xl">
           <Card className="bg-[#141b2c] rounded-lg border-gray-700  text-slate-300 shadow-lg p-14 w-full">
             <h3 className="text-3xl font-bold p-2">
-              {song.artist} - {song.title}
+              {song.row.artist} - {song.row.title}
             </h3>
             <p className="text-xl p-2 mt-2">
-              Album: {song.album}, Track: {song.tracknumber}, Year: {song.year}
+              Album: {song.row.album}, Track: {song.row.tracknumber}, Year: {song.row.year}
             </p>
           </Card>
         </div>
-          <AddToPlayListButton song_full_path={song.filepath} size="large" />
+        <AddToPlayListButton song_full_path={song.row.filepath} size="large" />
       </div>
+      {/* If the song has lyrics, display them */}
+      {song.lyrics && song.lyrics !== "No lyrics found for this song." && (
+        <div className="mt-4 p-8 w-full max-w-3xl mx-auto">
+          <Card className="bg-[#141b2c] rounded-lg border-gray-700 text-slate-300 shadow-lg p-14 w-full">
+            {song.lyrics.split("\r\n", 1)[0] && (
+              <h3 className="text-2xl font-bold p-2">{song.lyrics.split("\r\n", 1)[0]}</h3>
+            )}
+            {song.lyrics
+              .split("\r\n")
+              .slice(1)
+              .join("\r\n")
+              .split("\n")
+              .map((line, index) => (
+                <p key={index} className="text-xl text-slate-300 p-2 mt-1">
+                  {line}
+                </p>
+              ))}
+          </Card>
+        </div>
+      )}
     </div>
   );
 };
