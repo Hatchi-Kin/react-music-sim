@@ -16,9 +16,8 @@ const SimilarSongs = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const { songPath } = useSimilarSongs();
-  const { artistName } = useArtist();
-  const { setsongPath } = useSimilarSongs();
+  const { songPath, setsongPath } = useSimilarSongs();
+  const { artistName, setArtistName } = useArtist();
 
   const trackName = songPath.split("/").pop()?.replace(".mp3", "") || "";
 
@@ -85,7 +84,10 @@ const SimilarSongs = () => {
             >
               <div className="flex-grow relative">
                 <Link href="/homepage/similar-songs">
-                  <div className="absolute inset-0" onClick={() => setsongPath(song.path)}>
+                  <div className="absolute inset-0" onClick={() => {
+                    setsongPath(song.path);
+                    setArtistName(song.artist); 
+                  }}>
                     <div className="flex justify-between items-center">
                       <h3 className="text-lg font-bold text-slate-400 overflow-ellipsis overflow-hidden whitespace-nowrap max-w-xs">
                         {song.title}
