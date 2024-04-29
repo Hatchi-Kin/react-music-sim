@@ -50,9 +50,12 @@ const SimilarSpotiniteTracks = () => {
         setIsLoading(false);
       })
       .catch((error) => {
-        setError(error.message);
         setIsLoading(false);
-        window.location.href = "/sign-in";
+        if (error.message === '{"detail": "Invalid credentials"}') {
+          window.location.href = "/sign-in";
+        } else {
+          setError(error.message);
+        }
       });
   }, [trackName, artistName]);
 
