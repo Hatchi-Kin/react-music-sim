@@ -89,8 +89,8 @@ const MusicPlayer = () => {
   };
 
   // Function to handle volume change
-  const handleVolumeChange = (e) => {
-    const newVolume = e.target.value;
+  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newVolume = parseFloat(e.target.value);
     setVolume(newVolume);
     if (audioRef.current) {
       audioRef.current.volume = newVolume / 100; // Apply the new volume level
@@ -121,16 +121,11 @@ const MusicPlayer = () => {
         >
           <BiSkipNext size={24} />
         </button>
-        <div className="volume-controls">
-        <input
-          type="range"
-          min="0"
-          max="100"
-          value={volume}
-          onChange={handleVolumeChange}
-        />
-      </div>
+        {/* Volume slider */}
         {songUrl && <audio ref={audioRef} src={songUrl} onEnded={handleSongEnd} />}
+      </div>
+      <div className="volume-controls">
+        <input type="range" min="0" max="100" value={volume} onChange={handleVolumeChange} />
       </div>
       <div className="w-full p-1 max-w-md mx-auto overflow-hidden md:max-w-2xl">
         {playlist.length > 0 ? (
