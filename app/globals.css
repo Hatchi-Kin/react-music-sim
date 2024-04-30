@@ -84,3 +84,47 @@ body,
 .invert-logo {
   filter: invert(100%);
 }
+
+input[type='range'] {
+  -webkit-appearance: none;
+  width: 100%;
+  border-radius: 5px;
+  background: transparent; /* Set background to transparent */
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #0d9ee0;
+  cursor: pointer;
+  border: 1px solid white;
+  margin-top: -7px; /* Half of the difference between the height of the thumb and the height of the track */
+}
+
+input[type='range']::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #0d9ee0;
+  cursor: pointer;
+  border: 1px solid white;
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+  height: 8px;
+  background: linear-gradient(to right, #58a7c2, darkblue);
+  border-radius: 5px;
+}
+
+input[type='range']::-moz-range-track {
+  height: 8px;
+  background: linear-gradient(to right, #58a7c2, darkblue);
+  border-radius: 5px;
+}

@@ -88,68 +88,66 @@ const MusicPlayer = () => {
     setShouldFetchSong(true); // Set the flag to fetch a new song
   };
 
-  // Function to handle volume change
-  const handleVolumeChange = (e: { target: { value: any; }; }) => {
-    const newVolume = e.target.value;
+  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newVolume = parseFloat(e.target.value);
     setVolume(newVolume);
     if (audioRef.current) {
-      audioRef.current.volume = newVolume / 100; // Apply the new volume level
+      audioRef.current.volume = (newVolume * newVolume) / 10000; // Apply the new volume level; human perception of sound is logarithmic, not linear.
     }
   };
 
   return (
-      <div
-          className="m-2 flex flex-col items-center justify-center text-slate-200 bg-gradient-to-r from-slate-800 to-slate-900 p-3 rounded shadow-md">
-        <div className="flex items-center mb-4">
-          <button
-              onClick={handlePrevSong}
-              className="p-2 text-slate-300 cursor-pointer"
-              style={{opacity: currentSongIndex === 0 ? 0.5 : 1}}
-          >
-            <BiSkipPrevious size={24}/>
-          </button>
-          <button
-              onClick={togglePlay}
-              className="p-2 text-slate-300 cursor-pointer"
-              disabled={playlist.length === 0} // Disable the button if the playlist is empty
-          >
-            {isPlaying ? <FaPause size={24}/> : <FaPlay size={24}/>}
-          </button>
-          <button
-              onClick={handleNextSong}
-              className="p-2 text-slate-300 cursor-pointer"
-              style={{opacity: currentSongIndex === playlist.length - 1 ? 0.5 : 1}}
-          >
-            <BiSkipNext size={24}/>
-          </button>
-          {songUrl && <audio ref={audioRef} src={songUrl} onEnded={handleSongEnd}/>}
-        </div>
-        <div className={'flex p-2 m-2 w-full'}>
-          <input
-              type="range"
-              className=" w-full h-2 bg-slate-300 rounded-full"
-              min="0"
-              max="100"
-              value={volume}
-              onChange={handleVolumeChange}
-          />
-        </div>
-        <div className="w-full p-1 max-w-md mx-auto overflow-hidden md:max-w-2xl">
-          {playlist.length > 0 ? (
-              playlist.map((song, index) => {
-                const songName = song.split("/").pop()?.replace(".mp3", "") || "";
-                return (
-                    <Card
-                        key={index}
-                        onClick={() => {
-                          setCurrentSongIndex(index);
-                          setShouldFetchSong(true); // Set the flag to fetch a new song
-                          if (audioRef.current) {
-                            audioRef.current.pause(); // Pause the current song
-                            setIsPlaying(false); // Update isPlaying state
-                          }
-                        }}
-                        className={`
+    <div className="m-2 flex flex-col items-center justify-center text-slate-200 bg-gradient-to-r from-slate-800 to-slate-900 p-3 rounded shadow-md">
+      <div className="flex items-center mb-4">
+        <button
+          onClick={handlePrevSong}
+          className="p-2 text-slate-300 cursor-pointer"
+          style={{ opacity: currentSongIndex === 0 ? 0.5 : 1 }}
+        >
+          <BiSkipPrevious size={24} />
+        </button>
+        <button
+          onClick={togglePlay}
+          className="p-2 text-slate-300 cursor-pointer"
+          disabled={playlist.length === 0} // Disable the button if the playlist is empty
+        >
+          {isPlaying ? <FaPause size={24} /> : <FaPlay size={24} />}
+        </button>
+        <button
+          onClick={handleNextSong}
+          className="p-2 text-slate-300 cursor-pointer"
+          style={{ opacity: currentSongIndex === playlist.length - 1 ? 0.5 : 1 }}
+        >
+          <BiSkipNext size={24} />
+        </button>
+        {songUrl && <audio ref={audioRef} src={songUrl} onEnded={handleSongEnd} />}
+      </div>
+      <div className={"flex p-2 m-2 w-full"}>
+        <input
+          type="range"
+          className=" w-full h-2 bg-slate-300 rounded-full"
+          min="0"
+          max="100"
+          value={volume}
+          onChange={handleVolumeChange}
+        />
+      </div>
+      <div className="w-full p-1 max-w-md mx-auto overflow-hidden md:max-w-2xl">
+        {playlist.length > 0 ? (
+          playlist.map((song, index) => {
+            const songName = song.split("/").pop()?.replace(".mp3", "") || "";
+            return (
+              <Card
+                key={index}
+                onClick={() => {
+                  setCurrentSongIndex(index);
+                  setShouldFetchSong(true); // Set the flag to fetch a new song
+                  if (audioRef.current) {
+                    audioRef.current.pause(); // Pause the current song
+                    setIsPlaying(false); // Update isPlaying state
+                  }
+                }}
+                className={`
               bg-[#111827] 
               rounded-lg 
               ml-2
@@ -164,27 +162,25 @@ const MusicPlayer = () => {
               transition-colors 
               ${index === currentSongIndex ? "bg-sky-800" : ""}
               duration-100`}
-                    >
-                      <div className="p-4 flex flex-col h-16 justify-between">
-                        <div className="flex items-center justify-between">
-                          <div
-                              className="text-xs font-semibold overflow-ellipsis overflow-hidden whitespace-nowrap flex-grow">
-                            <div className="prose text-xs text-slate-300">{songName}</div>
-                          </div>
-                          <div className="ml-2 flex-shrink-0">
-                            <AddToPlayListButton song_full_path={song} size="small"/>
-                          </div>
-                        </div>
-                      </div>
-                    </Card>
-                );
-              })
-          ) : (
-              <div className="text-slate-300 p-4">No songs in the playlist. Please add some songs.</div>
-          )}
-        </div>
-
+              >
+                <div className="p-4 flex flex-col h-16 justify-between">
+                  <div className="flex items-center justify-between">
+                    <div className="text-xs font-semibold overflow-ellipsis overflow-hidden whitespace-nowrap flex-grow">
+                      <div className="prose text-xs text-slate-300">{songName}</div>
+                    </div>
+                    <div className="ml-2 flex-shrink-0">
+                      <AddToPlayListButton song_full_path={song} size="small" />
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            );
+          })
+        ) : (
+          <div className="text-slate-300 p-4">No songs in the playlist. Please add some songs.</div>
+        )}
       </div>
+    </div>
   );
 };
 
