@@ -13,7 +13,7 @@ const MusicPlayer = () => {
 
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [shouldFetchSong, setShouldFetchSong] = useState(true);
-  const [volume, setVolume] = useState(50); // Add state for volume
+  const [volume, setVolume] = useState(50);
 
   const fetchSong = async (song: string) => {
     const token = localStorage.getItem("authToken") ?? "";
@@ -41,8 +41,8 @@ const MusicPlayer = () => {
     if (playlist.length > 0 && shouldFetchSong) {
       fetchSong(playlist[currentSongIndex]).then(() => {
         if (audioRef.current) {
-          audioRef.current.play(); // Play the song after it has been fetched
-          setIsPlaying(true); // Update isPlaying state
+          audioRef.current.play();
+          setIsPlaying(true);
         }
         setShouldFetchSong(false); // Reset the flag after fetching the song
       });
@@ -78,14 +78,14 @@ const MusicPlayer = () => {
 
   const handleNextSong = () => {
     if (audioRef.current) {
-      audioRef.current.pause(); // Pause the current song
+      audioRef.current.pause();
     }
     if (currentSongIndex < playlist.length - 1) {
       setCurrentSongIndex(currentSongIndex + 1);
     } else {
       setCurrentSongIndex(0);
     }
-    setShouldFetchSong(true); // Set the flag to fetch a new song
+    setShouldFetchSong(true);
   };
 
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -104,21 +104,21 @@ const MusicPlayer = () => {
           className="p-2 text-slate-300 cursor-pointer"
           style={{ opacity: currentSongIndex === 0 ? 0.5 : 1 }}
         >
-          <BiSkipPrevious size={24} />
+          <BiSkipPrevious size={36} />
         </button>
         <button
           onClick={togglePlay}
           className="p-2 text-slate-300 cursor-pointer"
           disabled={playlist.length === 0} // Disable the button if the playlist is empty
         >
-          {isPlaying ? <FaPause size={24} /> : <FaPlay size={24} />}
+          {isPlaying ? <FaPause size={28} /> : <FaPlay size={32} />}
         </button>
         <button
           onClick={handleNextSong}
           className="p-2 text-slate-300 cursor-pointer"
           style={{ opacity: currentSongIndex === playlist.length - 1 ? 0.5 : 1 }}
         >
-          <BiSkipNext size={24} />
+          <BiSkipNext size={36} />
         </button>
         {songUrl && <audio ref={audioRef} src={songUrl} onEnded={handleSongEnd} />}
       </div>
@@ -141,10 +141,10 @@ const MusicPlayer = () => {
                 key={index}
                 onClick={() => {
                   setCurrentSongIndex(index);
-                  setShouldFetchSong(true); // Set the flag to fetch a new song
+                  setShouldFetchSong(true);
                   if (audioRef.current) {
-                    audioRef.current.pause(); // Pause the current song
-                    setIsPlaying(false); // Update isPlaying state
+                    audioRef.current.pause();
+                    setIsPlaying(false);
                   }
                 }}
                 className={`

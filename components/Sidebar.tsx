@@ -41,8 +41,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
         label: "List all Artists",
         active: pathname === "/homepage/byartist",
         href: "/homepage/byartist",
-      }
-
+      },
     ],
     [pathname]
   );

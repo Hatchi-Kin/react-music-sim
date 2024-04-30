@@ -101,14 +101,14 @@ const SimilarSpotiniteTracks = () => {
             />
           </label>
           <div className="text-center">
-          <div className="text-center mt-8">
-  <Button
-    type="submit"
-    className=" py-2 px-4 bg-sky-600 text-white rounded-md hover:bg-sky-700 inline-block"
-  >
-    Search
-  </Button>
-</div>
+            <div className="text-center mt-8">
+              <Button
+                type="submit"
+                className=" py-2 px-4 bg-sky-600 text-white rounded-md hover:bg-sky-700 inline-block"
+              >
+                Search
+              </Button>
+            </div>
           </div>
         </form>
       </Card>
