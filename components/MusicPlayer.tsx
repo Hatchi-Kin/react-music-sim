@@ -13,6 +13,7 @@ const MusicPlayer = () => {
 
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [shouldFetchSong, setShouldFetchSong] = useState(true);
+  const [volume, setVolume] = useState(50); // Add state for volume
 
   const fetchSong = async (song: string) => {
     const token = localStorage.getItem("authToken") ?? "";
@@ -87,6 +88,15 @@ const MusicPlayer = () => {
     setShouldFetchSong(true); // Set the flag to fetch a new song
   };
 
+  // Function to handle volume change
+  const handleVolumeChange = (e) => {
+    const newVolume = e.target.value;
+    setVolume(newVolume);
+    if (audioRef.current) {
+      audioRef.current.volume = newVolume / 100; // Apply the new volume level
+    }
+  };
+
   return (
     <div className="m-2 flex flex-col items-center justify-center text-slate-200 bg-gradient-to-r from-slate-800 to-slate-900 p-3 rounded shadow-md">
       <div className="flex items-center mb-4">
@@ -111,6 +121,15 @@ const MusicPlayer = () => {
         >
           <BiSkipNext size={24} />
         </button>
+        <div className="volume-controls">
+        <input
+          type="range"
+          min="0"
+          max="100"
+          value={volume}
+          onChange={handleVolumeChange}
+        />
+      </div>
         {songUrl && <audio ref={audioRef} src={songUrl} onEnded={handleSongEnd} />}
       </div>
       <div className="w-full p-1 max-w-md mx-auto overflow-hidden md:max-w-2xl">
