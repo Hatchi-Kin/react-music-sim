@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi";
 import AddToPlayListButton from "@/components/AddToPlayList";
 import Image from "next/image";
+import PlotGenres from "@/components/GenresPlots";
 
 export interface Song {
   row: {
@@ -82,7 +83,7 @@ const RandomSongCard = () => {
         {/* Display the current song */}
         <div className="flex items-stretch gap-4 mt-4 mb-8 p-4 w-full max-w-4xl">
           <Card
-            className={`bg-[#141b2c] rounded-lg border-gray-700 text-slate-300 shadow-lg p-6 ${song.artwork ? "grid grid-cols-3 gap-4" : ""} items-center h-64 w-full`}
+            className={`bg-[#141b2c] rounded-lg border-gray-700 text-slate-300 shadow-lg p-6 ${song.artwork ? "grid grid-cols-3 gap-4" : ""} items-center h-84 w-full`}
           >
             <div
               className={`col-span-2 ${song.artwork ? "" : "col-span-3"} flex flex-col justify-between overflow-auto`}
@@ -94,18 +95,25 @@ const RandomSongCard = () => {
               </p>
             </div>
             {song.artwork && (
-              <div className="relative h-full col-span-1">
+              <div style={{ position: "relative", width: "250px", height: "auto" }}>
+              {/* <div className="relative h-full mb-4 col-span-1"> */}
                 <Image
                   src={`data:image/jpeg;base64,${song.artwork}`}
                   alt="Album Artwork"
-                  layout="fill"
-                  objectFit="contain"
+                  width={250}
+                  height={250}
                   className="rounded-lg"
                 />
               </div>
             )}
           </Card>
         </div>
+
+        {/* Display the genre plot */}
+        <div className="relative h-full col-span-1 mb-12">
+          <PlotGenres songPath={song.row.filepath} />
+        </div>
+
         <AddToPlayListButton song_full_path={song.row.filepath} size="large" />
         {/* If the song has lyrics, display them */}
         {song.lyrics && song.lyrics !== "No lyrics found for this song." && (
