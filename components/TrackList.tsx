@@ -4,6 +4,7 @@ import { useArtist } from "../contexts/ArtistContext";
 import { useSimilarSongs } from "../contexts/SimilarSongsContext";
 import AddToPlayListButton from "@/components/AddToPlayList";
 import Link from "next/link";
+import Spinner from "@/components/Spinner";
 
 interface Track {
   tracknumber: number;
@@ -58,7 +59,7 @@ const TracksForAlbum = () => {
     fetchTracklist();
   }, [fetchTracklist]);
 
-  if (isLoading) return <div className="text-white">Loading...</div>;
+  if (isLoading) return <div className="text-white"><Spinner /></div>;
   if (error) return <div className="text-white">Error: {error}</div>;
 
   return (

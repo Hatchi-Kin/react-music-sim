@@ -2,6 +2,7 @@ import React, { useCallback, useState } from "react";
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import Spinner from "@/components/Spinner";
 
 interface SimilarTrack {
   "Track Name": string;
@@ -17,9 +18,11 @@ const SimilarSpotiniteTracks = () => {
   const [error, setError] = useState(null);
   const [trackName, setTrackName] = useState("");
   const [artistName, setArtistName] = useState("");
+  const [hasSearched, setHasSearched] = useState(false); 
 
   const fetchSimilarTracks = useCallback(() => {
     setIsLoading(true);
+    setHasSearched(true);
     const token = localStorage.getItem("authToken") ?? "";
     const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -64,7 +67,7 @@ const SimilarSpotiniteTracks = () => {
     fetchSimilarTracks();
   };
 
-  if (isLoading) return <div className="text-white">Loading...</div>;
+  if (isLoading) return <div className="text-white"><Spinner /></div>;
   if (error) return <div className="text-white">Error: {error}</div>;
 
   return (
@@ -145,7 +148,7 @@ const SimilarSpotiniteTracks = () => {
               </div>
             </Card>
           ))
-        ) : (
+        ) : hasSearched && (
           <p className="text-slate-300">No similar tracks available</p>
         )}
       </div>

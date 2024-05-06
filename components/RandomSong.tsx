@@ -4,6 +4,7 @@ import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi";
 import AddToPlayListButton from "@/components/AddToPlayList";
 import Image from "next/image";
 import PlotGenres from "@/components/GenresPlots";
+import Spinner from "@/components/Spinner";
 
 export interface Song {
   row: {
@@ -60,7 +61,7 @@ const RandomSongCard = () => {
     }
   }, [fetchRandomSong]);
 
-  if (isLoading) return <div className="text-white">Loading...</div>;
+  if (isLoading) return <div className="text-white"><Spinner /></div>;
   if (error) return <div className="text-white">Error: {error}</div>;
   if (!song) return <div className="text-white">No song found</div>;
 

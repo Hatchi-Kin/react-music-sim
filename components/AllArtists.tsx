@@ -3,7 +3,8 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import Link from "next/link";
-import { useArtist } from "../contexts/ArtistContext"; // adjust the path according to your project structure
+import { useArtist } from "../contexts/ArtistContext";
+import Spinner from "@/components/Spinner";
 
 const ArtistList = () => {
   // State variables for artists, loading status, error message, and current page
@@ -78,7 +79,7 @@ const ArtistList = () => {
   };
 
   // Show loading or error message if necessary
-  if (isLoading) return <div className="text-white">Loading...</div>;
+  if (isLoading) return <div className="text-white"><Spinner /></div>;
   if (error) return <div className="text-white">Error: {error}</div>;
 
   // Calculate which artists to display on the current page

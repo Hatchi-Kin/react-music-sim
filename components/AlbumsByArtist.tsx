@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import { useArtist } from "../contexts/ArtistContext";
 import { useAlbum } from "@/contexts/AlbumContext";
 import Link from "next/link";
+import Spinner from "@/components/Spinner";
 
 const AlbumsByArtist = () => {
   const [albums, setAlbums] = useState<string[]>([]);
@@ -55,7 +56,7 @@ const AlbumsByArtist = () => {
     fetchAlbums();
   }, [fetchAlbums]);
 
-  if (isLoading) return <div className="text-white">Loading...</div>;
+  if (isLoading) return <div className="text-white"><Spinner /></div>;
   if (error) return <div className="text-white">Error: {error}</div>;
 
   return (

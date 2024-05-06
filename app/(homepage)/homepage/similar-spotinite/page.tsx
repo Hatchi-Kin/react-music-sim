@@ -40,7 +40,7 @@ export default function ListSpotinitePage() {
           bg-clip-text 
           text-transparent"
         >
-          Try Cyanite api to get similar tracks
+          Try Cyanite{'\''}s api to get similar tracks
         </h1>
       </div>
         <SimilarSpotiniteTracks />

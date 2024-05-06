@@ -32,9 +32,9 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
       },
       {
         icon: BiDice3,
-        label: "Random Spotinite",
-        active: pathname === "/homepage/random-spotinite",
-        href: "/homepage/random-spotinite",
+        label: "Cyanite API",
+        active: pathname === "/homepage/similar-spotinite",
+        href: "/homepage/similar-spotinite",
       },
       {
         icon: BiHeadphone,
