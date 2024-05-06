@@ -15,7 +15,6 @@ const Spinner = () => {
 
 export default Spinner;
 
-
 /* --------------------------------BASIC SPINNER------------------------------------- */
 // import React from "react";
 
@@ -31,7 +30,6 @@ export default Spinner;
 // };
 
 // export default Spinner;
-
 
 /* ---------------------------------WORMHOLE----------------------------------------- */
 // import React from "react";

@@ -56,11 +56,16 @@ const AlbumsByArtist = () => {
     fetchAlbums();
   }, [fetchAlbums]);
 
-  if (isLoading) return <div className="text-white"><Spinner /></div>;
+  if (isLoading)
+    return (
+      <div className="text-white">
+        <Spinner />
+      </div>
+    );
   if (error) return <div className="text-white">Error: {error}</div>;
 
   return (
-    <div>
+    <div className="h-screen overflow-auto pb-32">
       <h1
         className="
           text-slate-300 
@@ -77,7 +82,6 @@ const AlbumsByArtist = () => {
       >
         All albums for {artistFolder.replace("MegaSet/", "")}
       </h1>
-
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mt-8 p-7">
         {albums.length > 0 ? (
           albums.map((album, index) => (
@@ -110,7 +114,7 @@ const AlbumsByArtist = () => {
             </Link>
           ))
         ) : (
-          <p>No albums available</p>
+          <p className="text-slate-300">No albums available</p>
         )}
       </div>
     </div>

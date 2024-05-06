@@ -18,7 +18,7 @@ const SimilarSpotiniteTracks = () => {
   const [error, setError] = useState(null);
   const [trackName, setTrackName] = useState("");
   const [artistName, setArtistName] = useState("");
-  const [hasSearched, setHasSearched] = useState(false); 
+  const [hasSearched, setHasSearched] = useState(false);
 
   const fetchSimilarTracks = useCallback(() => {
     setIsLoading(true);
@@ -67,7 +67,12 @@ const SimilarSpotiniteTracks = () => {
     fetchSimilarTracks();
   };
 
-  if (isLoading) return <div className="text-white"><Spinner /></div>;
+  if (isLoading)
+    return (
+      <div className="text-white">
+        <Spinner />
+      </div>
+    );
   if (error) return <div className="text-white">Error: {error}</div>;
 
   return (
@@ -116,41 +121,39 @@ const SimilarSpotiniteTracks = () => {
         </form>
       </Card>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mt-8 p-7">
-        {tracks.length > 0 ? (
-          tracks.map((track, index) => (
-            <Card
-              key={index}
-              className="
-                flex
-                items-center
-                justify-center
-                bg-[#111827] 
-                rounded-lg 
-                ml-2
-                mr-2
-                border-gray-700 
-                text-slate-300 
-                shadow-lg 
-                p-4 "
-            >
-              <Image
-                src={track["Cover Image"]}
-                alt={track["Track Name"]}
-                width={250} // replace with your desired width
-                height={250}
-                className="max-w-full h-auto"
-              />
-              <div className="overflow-auto">
-                <h3 className="mb-4 ml-4 font-semibold">{track["Track Name"]}</h3>
-                <p className="mb-4 ml-4"> {track.Artist}</p>
-                <p className="mb-4 ml-4">{track.Album}</p>
-              </div>
-            </Card>
-          ))
-        ) : hasSearched && (
-          <p className="text-slate-300">No similar tracks available</p>
-        )}
+      <div className="grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-3 gap-6 mt-8 p-7">
+        {tracks.length > 0
+          ? tracks.map((track, index) => (
+              <Card
+                key={index}
+                className="
+                  flex
+                  items-center
+                  justify-center
+                  bg-[#111827] 
+                  rounded-lg 
+                  ml-2
+                  mr-2
+                  border-gray-700 
+                  text-slate-300 
+                  shadow-lg 
+                  p-4 "
+              >
+                <Image
+                  src={track["Cover Image"]}
+                  alt={track["Track Name"]}
+                  width={250}
+                  height={250}
+                  className="max-w-full h-auto"
+                />
+                <div className="overflow-auto">
+                  <h3 className="mb-4 ml-4 font-semibold">{track["Track Name"]}</h3>
+                  <p className="mb-4 ml-4"> {track.Artist}</p>
+                  <p className="mb-4 ml-4">{track.Album}</p>
+                </div>
+              </Card>
+            ))
+          : hasSearched && <p className="text-slate-300">No similar tracks available</p>}
       </div>
     </div>
   );

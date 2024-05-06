@@ -51,7 +51,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
             </Link>
           </div>
           <div className={twMerge(`flex-col justify-start gap-x-4`)}>
-            <Link href="/homepage/random-spotinite">
+            <Link href="/homepage/similar-spotinite">
               <button
                 className={twMerge(`
                   border-2 md:hidden justify-center bg-slate-400 rounded-full flex p-2 hover:opacity-75 transition

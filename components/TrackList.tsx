@@ -59,13 +59,20 @@ const TracksForAlbum = () => {
     fetchTracklist();
   }, [fetchTracklist]);
 
-  if (isLoading) return <div className="text-white"><Spinner /></div>;
+  if (isLoading)
+    return (
+      <div className="text-white">
+        <Spinner />
+      </div>
+    );
   if (error) return <div className="text-white">Error: {error}</div>;
 
   return (
-    <div>
-      <h1 className="text-slate-300 text-4xl mb-6 ml-20 font-bold tracking-wide uppercase 
-                      bg-gradient-to-r from-sky-800 via-sky-600 to-sky-200 bg-clip-text text-transparent">
+    <div className="h-screen overflow-auto pb-32">
+      <h1
+        className="text-slate-300 text-4xl mb-6 ml-20 font-bold tracking-wide uppercase 
+                      bg-gradient-to-r from-sky-800 via-sky-600 to-sky-200 bg-clip-text text-transparent"
+      >
         All tracks for <span className="text-sky-500 font-extrabold">{albumName}</span> of{" "}
         <span className="text-sky-500 font-extrabold">{artistName}</span>
       </h1>

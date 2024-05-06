@@ -38,7 +38,7 @@ const PlotGenres: React.FC<PlotGenresProps> = ({ songPath }) => {
 
   return (
     <div className="relative h-full col-span-1 p-2">
-      <div style={{ position: "relative", width: "600px" }}>
+      <div className="w-full sm:w-full md:w-full lg:w-full xl:w-full">
         {image && (
           <Image
             src={`data:image/jpeg;base64,${image}`}

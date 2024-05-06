@@ -62,11 +62,16 @@ const SimilarSongs = () => {
     fetchSimilarSongs();
   }, [fetchSimilarSongs]);
 
-  if (isLoading) return <div className="text-white"><Spinner /></div>;
+  if (isLoading)
+    return (
+      <div className="text-white">
+        <Spinner />
+      </div>
+    );
   if (error) return <div className="text-white">Error: {error}</div>;
 
   return (
-    <div>
+    <div className="h-screen overflow-auto pb-32">
       <h1
         className="text-slate-300 text-4xl mb-6 ml-20 font-bold tracking-wide uppercase 
                     bg-gradient-to-r from-sky-800 via-sky-600 to-sky-200 bg-clip-text text-transparent"
@@ -85,10 +90,13 @@ const SimilarSongs = () => {
             >
               <div className="flex-grow relative">
                 <Link href="/homepage/similar-songs">
-                  <div className="absolute inset-0" onClick={() => {
-                    setsongPath(song.path);
-                    setArtistName(song.artist); 
-                  }}>
+                  <div
+                    className="absolute inset-0"
+                    onClick={() => {
+                      setsongPath(song.path);
+                      setArtistName(song.artist);
+                    }}
+                  >
                     <div className="flex justify-between items-center">
                       <h3 className="text-lg font-bold text-slate-400 overflow-ellipsis overflow-hidden whitespace-nowrap max-w-xs">
                         {song.title}

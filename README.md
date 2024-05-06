@@ -38,7 +38,16 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 │   │       │   └── page.tsx
 │   │       ├── byartist
 │   │       │   └── page.tsx
+│   │       ├── random-song
+│   │       │   └── page.tsx
+│   │       ├── similar-song
+│   │       │   └── page.tsx
+│   │       ├── similar-spotinite
+│   │       │   └── page.tsx
+│   │       ├── tracklist
+│   │       │   └── page.tsx
 │   │       ├── layout.tsx
+|   │       │
 │   │       ├── page.tsx
 │   │       └── random-song
 │   │           └── page.tsx
@@ -58,6 +67,7 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 │   ├── AllArtist.tsx
 │   ├── Box.tsx
 │   ├── Button.tsx
+│   ├── GenrePlots.tsx
 │   ├── Header.tsx
 │   ├── LandingHero.tsx
 │   ├── LandingNavbar.tsx
@@ -65,8 +75,11 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 │   ├── MusicPlayer.tsx
 │   ├── ParticuleRing.tsx
 │   ├── RandomSong.tsx
-│   ├── Sidebaritem.tsx
 │   ├── Sidebar.tsx
+│   ├── Sidebaritem.tsx
+│   ├── Spinner.tsx
+│   ├── SpotiniteSimilar.tsx
+│   ├── Tracklist.tsx
 │   └── ui
 │       ├── button.tsx
 │       ├── card.tsx
@@ -82,7 +95,7 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 │   ├── PlayListContext.tsx
 │   ├── PlayListProvider.tsx
 │   ├── SimilarSongsContext.tsx
-│   └──SimilarSongsProvider.tsx
+│   └── SimilarSongsProvider.tsx
 │
 ├── lib
 │   └── utils.ts
