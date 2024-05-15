@@ -3,9 +3,9 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
-import RandomSong from "@/components/RandomSong";
+import ManageMyFavorites from "@/components/MyFavorites";
 
-export default function ListArtistPage() {
+export default function MyPlaylist() {
   const router = useRouter();
 
   useEffect(() => {
@@ -41,10 +41,10 @@ export default function ListArtistPage() {
           bg-clip-text 
           text-transparent"
         >
-          Get a Random Song to listen to
+          Manage youy Favorites
         </h1>
       </div>
-      <RandomSong />
+      <ManageMyFavorites />
     </div>
   );
 }

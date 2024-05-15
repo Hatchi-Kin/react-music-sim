@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 import { HiHome } from "react-icons/hi";
 import { BiHeadphone, BiDice3 } from "react-icons/bi";
+import { MdFavorite } from "react-icons/md";
 import { LiaDiceD6Solid } from "react-icons/lia";
 import { FaUserAltSlash } from "react-icons/fa";
 import React from "react";
@@ -72,8 +73,18 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
               </button>
             </Link>
           </div>
+          <div className={twMerge(`flex-col justify-start gap-x-4`)}>
+            <Link href="/homepage/user-favorites">
+              <button
+                className={twMerge(`
+                  border-2  md:hidden justify-center bg-slate-400 rounded-full flex p-2 hover:opacity-75 transition
+                  `)}
+              >
+                <MdFavorite className={twMerge(`text-black`)} size={30} />
+              </button>
+            </Link>
+          </div>
         </div>
-
         <div className={twMerge(`flex-col-reverse justify-end gap-x-4`)}>
           <Button
             onClick={handlelogout}
