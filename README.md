@@ -127,4 +127,5 @@ Host github-megapi
     IdentityFile ~/.ssh/id_ed25519_gh_megapi
 ```
 et une clé privée nommé `id_ed25519_gh_megapi`
+//
 // https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh
