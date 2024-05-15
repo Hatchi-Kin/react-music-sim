@@ -16,7 +16,6 @@ export default function ListTracks() {
       "
     >
       <div>
-        <Header>Headers</Header>
         <SimilarSongs />
       </div>
     </div>

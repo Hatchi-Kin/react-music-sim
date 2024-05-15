@@ -4,6 +4,7 @@ import { useArtist } from "../contexts/ArtistContext";
 import AddToPlayListButton from "@/components/AddToPlayList";
 import Link from "next/link";
 import Spinner from "@/components/Spinner";
+import Header from "@/components/Header";
 
 interface Song {
   title: string;
@@ -72,13 +73,9 @@ const SimilarSongs = () => {
 
   return (
     <div className="h-screen overflow-auto pb-32">
-      <h1
-        className="text-slate-300 text-4xl mb-6 ml-20 font-bold tracking-wide uppercase 
-                    bg-gradient-to-r from-sky-800 via-sky-600 to-sky-200 bg-clip-text text-transparent"
-      >
-        Similar songs of <span className="text-sky-500 font-extrabold">{trackName}</span> by{" "}
-        <span className="text-sky-500 font-extrabold">{artistName}</span>
-      </h1>
+      {/* eslint-disable-next-line react/no-children-prop */}
+      <Header title={`Similar songs of ${trackName}`} children={undefined}>
+      </Header>
 
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mt-8 p-7">
         {songs.length > 0 ? (

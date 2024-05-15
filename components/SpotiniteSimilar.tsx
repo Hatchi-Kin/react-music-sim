@@ -107,29 +107,29 @@ const SimilarSpotiniteTracks = () => {
           mx-auto"
       >
         <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
-          <label className="block mb-4">
-            <span className="text-slate-300">Track Name:</span>
+          <label className="block justify-center">
+            <span className="text-slate-300 font-semibold">Artist Name:</span>
             <input
-              type="text"
-              value={trackName}
-              onChange={(e) => setTrackName(e.target.value)}
-              className="w-full mt-1 p-2 rounded-md bg-gray-800 text-white"
+                type="text"
+                value={artistName}
+                onChange={(e) => setArtistName(e.target.value)}
+                className="w-full mt-1 p-2 rounded-md bg-gray-800 text-white"
             />
           </label>
-          <label className="block">
-            <span className="text-slate-300">Artist Name:</span>
+          <label className="block mb-4">
+            <span className="text-slate-300 font-semibold">Track Name:</span>
             <input
-              type="text"
-              value={artistName}
-              onChange={(e) => setArtistName(e.target.value)}
-              className="w-full mt-1 p-2 rounded-md bg-gray-800 text-white"
+                type="text"
+                value={trackName}
+                onChange={(e) => setTrackName(e.target.value)}
+                className="w-full mt-1 p-2 rounded-md bg-gray-800 text-white"
             />
           </label>
           <div className="text-center">
-            <div className="text-center mt-8">
+            <div className="text-center mt-8 ">
               <Button
-                type="submit"
-                className=" py-2 px-4 bg-sky-600 text-white rounded-md hover:bg-sky-700 inline-block"
+                  type="submit"
+                  className=" py-2 px-4 bg-sky-600 text-white rounded-md hover:bg-sky-700 inline-block"
               >
                 Search
               </Button>
@@ -140,10 +140,10 @@ const SimilarSpotiniteTracks = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-3 gap-6 mt-8 p-7">
         {tracks.length > 0
-          ? tracks.map((track, index) => (
-              <Card
-                key={index}
-                className="
+            ? tracks.map((track, index) => (
+                <Card
+                    key={index}
+                    className="
                   flex
                   items-center
                   justify-center

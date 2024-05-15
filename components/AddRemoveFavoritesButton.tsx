@@ -73,7 +73,7 @@ const AddRemoveFavoritesButton: React.FC<AddRemoveFavoritesButtonProps> = ({ son
   };
 
   return (
-    <button onClick={handleAddRemove} className='border-2'>
+    <button onClick={handleAddRemove} className='border-2 sm: rounded-full'>
       {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
     </button>
   );
