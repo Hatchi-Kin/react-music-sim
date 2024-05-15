@@ -108,20 +108,20 @@ const SimilarSpotiniteTracks = () => {
       >
         <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
           <label className="block mb-4">
-            <span className="text-slate-300">Track Name:</span>
-            <input
-              type="text"
-              value={trackName}
-              onChange={(e) => setTrackName(e.target.value)}
-              className="w-full mt-1 p-2 rounded-md bg-gray-800 text-white"
-            />
-          </label>
-          <label className="block">
             <span className="text-slate-300">Artist Name:</span>
             <input
               type="text"
               value={artistName}
               onChange={(e) => setArtistName(e.target.value)}
+              className="w-full mt-1 p-2 rounded-md bg-gray-800 text-white"
+            />
+          </label>
+          <label className="block">
+            <span className="text-slate-300">Track Name:</span>
+            <input
+              type="text"
+              value={trackName}
+              onChange={(e) => setTrackName(e.target.value)}
               className="w-full mt-1 p-2 rounded-md bg-gray-800 text-white"
             />
           </label>
@@ -171,10 +171,10 @@ const SimilarSpotiniteTracks = () => {
               </Card>
             ))
           : hasSearched && (
-                <p className="text-slate-300">
-                  No similar tracks available, please make sure the track name and artist name are
-                  correct.
-                </p>
+              <p className="text-slate-300">
+                No similar tracks available, please make sure the track name and artist name are
+                correct.
+              </p>
             )}
       </div>
     </div>

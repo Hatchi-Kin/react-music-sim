@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import Link from "next/link";
-import { useArtist } from "../contexts/ArtistContext";
+import { useArtist } from "@/contexts/ArtistContext";
 import Spinner from "@/components/Spinner";
 
 const ArtistList = () => {
@@ -90,22 +90,6 @@ const ArtistList = () => {
   // Render the component
   return (
     <div>
-      <h1
-        className="
-          text-slate-300 
-          text-4xl 
-          mb-6 
-          ml-20 
-          font-bold 
-          tracking-wide 
-          uppercase 
-          bg-gradient-to-r 
-          from-sky-800 via-sky-500 to-sky-200  
-          bg-clip-text 
-          text-transparent"
-      >
-        All Artists in MegaSet
-      </h1>
       {/* Navigation buttons */}
       <div className="flex justify-center space-x-4 mt-6 mb-4">
         <Button
@@ -147,6 +131,7 @@ const ArtistList = () => {
                 <h3 className="text-lg ml-6 font-bold p-2 overflow-hidden text-overflow-ellipsis whitespace-nowrap">
                   {artist}
                 </h3>
+
               </Card>
             </Link>
           ))

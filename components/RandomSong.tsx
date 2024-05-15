@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback, useRef } from "react";
 import { Card } from "@/components/ui/card";
 import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi";
 import AddToPlayListButton from "@/components/AddToPlayList";
+import AddRemoveFavoritesButton from "@/components/AddRemoveFavoritesButton";
 import Image from "next/image";
 import PlotGenres from "@/components/GenresPlots";
 import Spinner from "@/components/Spinner";
@@ -61,7 +62,12 @@ const RandomSongCard = () => {
     }
   }, [fetchRandomSong]);
 
-  if (isLoading) return <div className="text-white"><Spinner /></div>;
+  if (isLoading)
+    return (
+      <div className="text-white">
+        <Spinner />
+      </div>
+    );
   if (error) return <div className="text-white">Error: {error}</div>;
   if (!song) return <div className="text-white">No song found</div>;
 
@@ -97,7 +103,7 @@ const RandomSongCard = () => {
             </div>
             {song.artwork && (
               <div style={{ position: "relative", width: "250px", height: "auto" }}>
-              {/* <div className="relative h-full mb-4 col-span-1"> */}
+                {/* <div className="relative h-full mb-4 col-span-1"> */}
                 <Image
                   src={`data:image/jpeg;base64,${song.artwork}`}
                   alt="Album Artwork"
@@ -114,7 +120,9 @@ const RandomSongCard = () => {
         <div className="relative h-full col-span-1 mb-12">
           <PlotGenres songPath={song.row.filepath} />
         </div>
-
+        <div className="mb-4">
+          <AddRemoveFavoritesButton songPath={song.row.filepath} size="4em" />
+        </div>
         <AddToPlayListButton song_full_path={song.row.filepath} size="large" />
         {/* If the song has lyrics, display them */}
         {song.lyrics && song.lyrics !== "No lyrics found for this song." && (

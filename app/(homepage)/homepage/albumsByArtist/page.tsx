@@ -16,7 +16,6 @@ export default function ArtistAlbumsPage() {
       "
     >
       <div>
-        <Header>Headers</Header>
         <AlbumsByArtist />
       </div>
     </div>

@@ -3,8 +3,10 @@ import { useAlbum } from "../contexts/AlbumContext";
 import { useArtist } from "../contexts/ArtistContext";
 import { useSimilarSongs } from "../contexts/SimilarSongsContext";
 import AddToPlayListButton from "@/components/AddToPlayList";
+import AddRemoveFavoritesButton from "@/components/AddRemoveFavoritesButton";
 import Link from "next/link";
 import Spinner from "@/components/Spinner";
+import Header from "@/components/Header";
 
 interface Track {
   tracknumber: number;
@@ -69,13 +71,8 @@ const TracksForAlbum = () => {
 
   return (
     <div className="h-screen overflow-auto pb-32">
-      <h1
-        className="text-slate-300 text-4xl mb-6 ml-20 font-bold tracking-wide uppercase 
-                      bg-gradient-to-r from-sky-800 via-sky-600 to-sky-200 bg-clip-text text-transparent"
-      >
-        All tracks for <span className="text-sky-500 font-extrabold">{albumName}</span> of{" "}
-        <span className="text-sky-500 font-extrabold">{artistName}</span>
-      </h1>
+      {/* eslint-disable-next-line react/no-children-prop */}
+      <Header title={`${artistName} : ${albumName} `} children={""}></Header>
 
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mt-8 p-7">
         {tracks.length > 0 ? (
@@ -96,6 +93,7 @@ const TracksForAlbum = () => {
               </div>
               <div className="w-8">
                 <AddToPlayListButton song_full_path={track.path} size="small" />
+                <AddRemoveFavoritesButton songPath={track.path} />
               </div>
             </div>
           ))

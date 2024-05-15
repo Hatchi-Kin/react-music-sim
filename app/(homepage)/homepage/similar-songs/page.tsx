@@ -1,6 +1,5 @@
 "use client";
 
-import Header from "@/components/Header";
 import SimilarSongs from "@/components/SimilarSongs";
 
 export default function ListTracks() {
@@ -16,7 +15,6 @@ export default function ListTracks() {
       "
     >
       <div>
-        <Header>Headers</Header>
         <SimilarSongs />
       </div>
     </div>

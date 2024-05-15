@@ -7,22 +7,6 @@ import Link from "next/link";
 import Spinner from "@/components/Spinner";
 import { Card } from "@/components/ui/card";
 
-interface FavoritesFromAPI {
-  album_folder: string;
-  id: number;
-  filesize: number;
-  artist: string;
-  year: number;
-  genre: string;
-  filename: string;
-  filepath: string;
-  artist_folder: string;
-  title: string;
-  album: string;
-  tracknumber: number;
-  top_5_genres: string;
-}
-
 interface UsersFavorites {
   filepath: string;
   artist: string;
@@ -32,9 +16,10 @@ interface UsersFavorites {
 
 const ManageMyFavorites = () => {
   const [songs, setSongs] = useState<UsersFavorites[]>([]);
-  const [rawResponse, setRawResponse] = useState<any>(null); // New state variable for raw response
+  const [rawResponse, setRawResponse] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [refresh, setRefresh] = useState(false);
 
   const { songPath, setsongPath } = useSimilarSongs();
   const { artistName, setArtistName } = useArtist();
@@ -78,7 +63,7 @@ const ManageMyFavorites = () => {
 
   useEffect(() => {
     fetchMyFavorites();
-  }, [fetchMyFavorites]);
+  }, [fetchMyFavorites, refresh]);
 
   if (isLoading)
     return (
@@ -90,23 +75,27 @@ const ManageMyFavorites = () => {
 
   return (
     <div className="h-screen overflow-auto pb-32">
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mt-8 p-7">
+      <div className="mt-8 p-7">
         {songs.length > 0 ? (
           songs.map((song, index) => (
             <Card
               key={index}
               className="
-              flex
-              items-center
-              justify-center
-              bg-[#111827] 
-              rounded-lg 
-              ml-2
-              mr-2
-              border-gray-700 
-              text-slate-300 
-              shadow-lg 
-              p-4 "
+                flex
+                items-start
+                justify-between
+                bg-[#111827] 
+                rounded-lg 
+                ml-2
+                mr-2
+                border-gray-700 
+                text-slate-300 
+                shadow-lg 
+                p-4 
+                mb-4
+                max-w-[90%] 
+                mx-auto 
+                "
             >
               <div className="flex-grow relative">
                 <Link href="/homepage/similar-songs">
@@ -117,21 +106,25 @@ const ManageMyFavorites = () => {
                       setArtistName(song.artist);
                     }}
                   >
-                    <div className="flex justify-between items-center">
-                      <h3 className="text-lg font-bold text-slate-400 overflow-ellipsis overflow-hidden whitespace-nowrap max-w-xs">
+                    <div className="flex justify-between items-center w-full">
+                      <h3 className="text-lg font-bold text-slate-400 overflow-ellipsis overflow-hidden whitespace-nowrap mb-4 max-w-xs">
                         {song.title}
                       </h3>
-                      <div className="w-8"></div>
                     </div>
-                    <div className="flex flex-col items-center">
+                    <div className="flex flex-col items-start">
                       <p className="">{song.artist}</p>
                       <p className="">{song.album}</p>
                     </div>
                   </div>
                 </Link>
               </div>
-              <AddToPlayListButton song_full_path={song.filepath} size="small" />
-              <AddRemoveFavoritesButton songPath={song.filepath} />
+              <div className="m-4">
+                <AddToPlayListButton song_full_path={song.filepath} size="small" />
+                <AddRemoveFavoritesButton
+                  songPath={song.filepath}
+                  onRemove={() => setRefresh(!refresh)}
+                />
+              </div>
             </Card>
           ))
         ) : (

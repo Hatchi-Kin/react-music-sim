@@ -25,25 +25,7 @@ export default function MyPlaylist() {
           overflow-y-auto
           "
     >
-      <Header>Headers</Header>
-      <div>
-        <h1
-          className="
-          text-slate-300 
-          text-4xl 
-          mb-6 
-          ml-20 
-          font-bold 
-          tracking-wide 
-          uppercase 
-          bg-gradient-to-r 
-          from-sky-800 via-sky-500 to-sky-200  
-          bg-clip-text 
-          text-transparent"
-        >
-          Manage youy Favorites
-        </h1>
-      </div>
+      <Header title={'Manage your Favorites'}>Headers</Header>
       <ManageMyFavorites />
     </div>
   );
