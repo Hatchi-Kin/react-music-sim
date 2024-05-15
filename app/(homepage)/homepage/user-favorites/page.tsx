@@ -26,7 +26,6 @@ export default function MyPlaylist() {
           "
     >
       <Header title={'Manage your Favorites'}>Headers</Header>
-
       <ManageMyFavorites />
     </div>
   );
