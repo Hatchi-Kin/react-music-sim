@@ -70,7 +70,7 @@ const AlbumsByArtist = () => {
   return (
     <div className="h-screen overflow-auto pb-32">
       {/* eslint-disable-next-line react/no-children-prop */}
-      <Header title={`All albums for: ${artistName}`} children={''}></Header>
+      <Header title={`${artistName} albums`} children={''}></Header>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mt-8 p-7">
         {albums.length > 0 ? (
           albums.map((album, index) => (
