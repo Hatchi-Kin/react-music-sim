@@ -71,7 +71,7 @@ const TracksForAlbum = () => {
   return (
     <div className="h-screen overflow-auto pb-32">
       {/* eslint-disable-next-line react/no-children-prop */}
-      <Header title={`All tracks for "${albumName}" of "${artistName}"`} children={''}></Header>
+      <Header title={`${artistName} : ${albumName} `} children={''}></Header>
 
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mt-8 p-7">
         {tracks.length > 0 ? (
