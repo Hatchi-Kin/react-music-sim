@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useSimilarSongs } from "../contexts/SimilarSongsContext";
 import { useArtist } from "../contexts/ArtistContext";
 import AddToPlayListButton from "@/components/AddToPlayList";
+import AddRemoveFavoritesButton from "@/components/AddRemoveFavoritesButton";
 import Link from "next/link";
 import Spinner from "@/components/Spinner";
 
@@ -115,6 +116,7 @@ const SimilarSongs = () => {
               </div>
               <div className="w-8">
                 <AddToPlayListButton song_full_path={song.path} size="small" />
+                <AddRemoveFavoritesButton songPath={song.path} />
               </div>
             </div>
           ))
