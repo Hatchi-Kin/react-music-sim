@@ -14,9 +14,10 @@ import Link from "next/link";
 interface HeaderProps {
   children: React.ReactNode;
   className?: string;
+  title?: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ children, className }) => {
+const Header: React.FC<HeaderProps> = ({ children, className, title }) => {
   const router = useRouter();
 
   const handlelogout = () => {
@@ -28,6 +29,18 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
   return (
     <div className={twMerge(`h-fit bg-gradient-to-b from-slate-800 p-6`, className)}>
       <div className={twMerge(`flex justify-between gap-x-4 items-center`)}>
+        <div>
+          {title && <h1 className={twMerge(`
+          text-slate-300 
+          text-4xl 
+          space-x-4
+          font-bold
+          uppercase 
+          bg-gradient-to-r 
+          from-sky-800 via-sky-500 to-sky-200  
+          bg-clip-text 
+          text-transparent`)}>{title}</h1>}
+        </div>
         <div className={twMerge(`flex items-center gap-x-4`)}>
           <div className={twMerge(`flex-col justify-start gap-x-4`)}>
             <Link href="/homepage">

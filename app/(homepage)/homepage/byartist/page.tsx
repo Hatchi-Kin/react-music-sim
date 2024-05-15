@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
 import ArtistList from "@/components/AllArtists";
 
+
+
 export default function ListArtistPage() {
   const router = useRouter();
 
@@ -25,7 +27,9 @@ export default function ListArtistPage() {
           overflow-y-auto
           "
     >
-      <Header>Headers</Header>
+      {/* eslint-disable-next-line react/no-children-prop */}
+      <Header title="All Artists in MegaSet" children={undefined} >
+      </Header>
       <ArtistList />
     </div>
   );
