@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useSimilarSongs } from "../contexts/SimilarSongsContext";
 import { useArtist } from "../contexts/ArtistContext";
 import AddToPlayListButton from "@/components/AddToPlayList";
+import AddRemoveFavoritesButton from "@/components/AddRemoveFavoritesButton";
 import Link from "next/link";
 import Spinner from "@/components/Spinner";
 import { Card } from "@/components/ui/card";
@@ -130,6 +131,7 @@ const ManageMyFavorites = () => {
                 </Link>
               </div>
               <AddToPlayListButton song_full_path={song.filepath} size="small" />
+              <AddRemoveFavoritesButton songPath={song.filepath} />
             </Card>
           ))
         ) : (
