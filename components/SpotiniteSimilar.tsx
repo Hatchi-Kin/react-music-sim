@@ -15,7 +15,7 @@ interface SimilarTrack {
 const SimilarSpotiniteTracks = () => {
   const [tracks, setTracks] = useState<SimilarTrack[]>([]);
   const [isLoading, setIsLoading] = useState(false); // Initialize to false
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const [trackName, setTrackName] = useState("");
   const [artistName, setArtistName] = useState("");
   const [hasSearched, setHasSearched] = useState(false);
@@ -40,15 +40,32 @@ const SimilarSpotiniteTracks = () => {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error(`Network response was not ok: ${response.statusText}`);
+          if (response.status === 400) {
+            // Check if the status is 400
+            return response.json().then((data) => {
+              if (data.detail === "list index out of range") {
+                // Check if the detail is "list index out of range"
+                return Promise.reject(
+                  "No matches found, please make sure the artist and name are correct."
+                );
+              } else {
+                return Promise.reject(`Network response was not ok: ${response.statusText}`);
+              }
+            });
+          } else {
+            return Promise.reject(`Network response was not ok: ${response.statusText}`);
+          }
+        } else {
+          return response.json();
         }
-        return response.json();
       })
       .then((data) => {
-        if (Array.isArray(data)) {
+        if (Array.isArray(data) && data.length > 0) {
           setTracks(data);
+        } else if (Array.isArray(data) && data.length === 0) {
+          setError("No tracks found");
         } else {
-          throw new Error("Data format is incorrect, expected an array of tracks");
+          setError("Data format is incorrect, expected an array of tracks");
         }
         setIsLoading(false);
       })
@@ -79,15 +96,15 @@ const SimilarSpotiniteTracks = () => {
     <div className="text-white">
       <Card
         className="
-    bg-[#111827] 
-    rounded-lg 
-    mt-20 mb-12
-    border-gray-700 
-    text-slate-300 
-    shadow-lg 
-    p-8
-    w-1/2
-    mx-auto"
+          bg-[#111827] 
+          rounded-lg 
+          mt-20 mb-12
+          border-gray-700 
+          text-slate-300 
+          shadow-lg 
+          p-8
+          w-1/2
+          mx-auto"
       >
         <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
           <label className="block mb-4">
@@ -153,7 +170,12 @@ const SimilarSpotiniteTracks = () => {
                 </div>
               </Card>
             ))
-          : hasSearched && <p className="text-slate-300">No similar tracks available</p>}
+          : hasSearched && (
+                <p className="text-slate-300">
+                  No similar tracks available, please make sure the track name and artist name are
+                  correct.
+                </p>
+            )}
       </div>
     </div>
   );
