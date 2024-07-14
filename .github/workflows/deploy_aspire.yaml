@@ -1,0 +1,26 @@
+name: Deploy on Aspire 
+
+on: 
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy to Aspire on main branch push
+      uses: appleboy/ssh-action@master 
+      with:
+        host: ${{ secrets.SSH_PI_HOST_LIVEBOX_IP }}
+        username: ${{ secrets.SSH_ASPIRE_USERNAME }}
+        key: ${{ secrets.ASPIRE_SSH_PRIVATE_KEY }}
+        port: ${{ secrets.SSH_PI_PORT }}
+        script: |
+          cd /home/hatchi/Projets/react-music-sim
+          git config --global credential.helper '!f() { echo username=${{ secrets.GH_USERNAME }}; echo password=${{ secrets.GH_PAT_ASPIRE }}; }; f'
+          git fetch origin main
+          git reset --hard origin/main
+          docker compose build
+          docker compose up -d
