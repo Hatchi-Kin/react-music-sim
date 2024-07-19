@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
-// import ManageMyFavorites from "@/components/MyFavorites";
+import UserUploadsList from "@/components/UserUploads";
 
 export default function MyPlaylist() {
   const router = useRouter();
@@ -26,7 +26,7 @@ export default function MyPlaylist() {
           "
     >
       <Header title={'Manage your Uploads'}>Headers</Header>
-      {/* <ManageMyFavorites /> */}
+      <UserUploadsList />
     </div>
   );
 }
