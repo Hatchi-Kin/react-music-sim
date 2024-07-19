@@ -11,6 +11,7 @@ const UserUploadsList = () => {
   const [uploads, setUploads] = useState<string[]>([]);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [uploadSuccess, setUploadSuccess] = useState(false);
+  const [notification, setNotification] = useState({ message: "", type: "" });
 
   const fetchUploads = useCallback(() => {
     setIsLoading(true);
@@ -54,7 +55,7 @@ const UserUploadsList = () => {
     }
 
     if (file.type !== "audio/mpeg") {
-      alert("Please select an MP3 file.");
+      showNotification("Please select an MP3 file.", "error");
       return; // File is not an MP3, exit the function
     }
 
@@ -87,8 +88,67 @@ const UserUploadsList = () => {
         setTimeout(() => setUploadSuccess(false), 5000);
       })
       .catch((error) => {
-        console.error("Upload error:", error);
+        setIsLoading(false);
+        if (error.message === '{"detail": "Invalid credentials"}') {
+          window.location.href = "/sign-in";
+        } else {
+          setError(error.message);
+        }
       });
+  };
+
+  // function to call api to fetch embeddings endpoint POST openl3/embeddings/
+  async function handleExtractEmbeddings(filePath: string) {
+    try {
+      const response = await fetch(`${baseUrl}/openl3/embeddings/?file_path=${filePath}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to extract embeddings");
+      }
+
+      showNotification("Embeddings extracted successfully");
+    } catch (error) {
+      console.error("Error extracting embeddings:", error);
+      showNotification("Error extracting embeddings", "error");
+    }
+  }
+
+  async function handleDeleteFile(filePath: string) {
+    try {
+      const response = await fetch(`${baseUrl}/minio/delete-temp`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ file_path: filePath }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete the file");
+      }
+
+      // Optionally, remove the file from the uploads state to update the UI
+      setUploads(uploads.filter((file) => file !== filePath));
+
+      showNotification("File deleted successfully");
+    } catch (error) {
+      console.error("Error deleting file:", error);
+      showNotification("Error deleting file", "error");
+    }
+  }
+
+  const showNotification = (message: string, type = "success") => {
+    setNotification({ message, type });
+    setTimeout(() => {
+      setNotification({ message: "", type: "" }); // Hide notification after 3 seconds
+    }, 3000);
   };
 
   if (isLoading)
@@ -101,7 +161,7 @@ const UserUploadsList = () => {
 
   return (
     <div className="h-screen overflow-auto pb-32 mt-16">
-      <div className="mb-4 mx-auto sm:mx-12">
+      <div className="mb-12 mx-auto sm:mx-12">
         <input
           type="file"
           accept=".mp3"
@@ -119,25 +179,38 @@ const UserUploadsList = () => {
       </div>
 
       {uploads.map((upload, index) => (
-        <div
-          key={index}
-          className="flex flex-col sm:flex-row justify-between mb-4 mx-auto sm:mx-12"
-        >
-          <Card className="flex items-start justify-between bg-[#111827] rounded-lg border-gray-700 text-slate-300 shadow-lg p-4 w-full sm:w-1/2 mr-2 sm:mr-4">
-            {upload}
-          </Card>
-          <Card className="flex justify-center items-center bg-[#111827] rounded-lg border-gray-700 text-slate-300 shadow-lg p-4 w-full sm:w-1/2 ml-2 sm:ml-4 mt-4 sm:mt-0">
-            <div className="flex space-x-4 sm:space-x-24">
-              <Button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                extract embeddings
-              </Button>
-              <Button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                similar songs
-              </Button>
+        <div key={index} className="mb-4 mx-6">
+          <Card className="bg-[#111827] rounded-lg border-gray-700 text-slate-300 shadow-lg p-4">
+            <div className="flex flex-col sm:flex-row justify-between items-center">
+              <div className="sm:w-1/2">{upload}</div>
+              <div className="flex flex-col sm:flex-row space-x-0 sm:space-x-4 mt-4 sm:mt-0">
+                <Button
+                  onClick={() => handleExtractEmbeddings(upload)}
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-2 sm:mb-0"
+                >
+                  Extract Embeddings
+                </Button>
+                <Button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-2 sm:mb-0">
+                  Similar Songs
+                </Button>
+                <Button
+                  onClick={() => handleDeleteFile(upload)}
+                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                >
+                  Delete
+                </Button>
+              </div>
             </div>
           </Card>
         </div>
       ))}
+
+      {/* Notification */}
+      {notification.message && (
+        <div className={`notification ${notification.type} text-slate-300`}>
+          <div className="w-3/4 sm:w-1/2 lg:w-1/4 mx-auto">{notification.message}</div>
+        </div>
+      )}
     </div>
   );
 };

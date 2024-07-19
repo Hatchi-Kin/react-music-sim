@@ -45,9 +45,12 @@ const ArtistList = () => {
         setIsLoading(false);
       })
       .catch((error) => {
-        setError(error.message);
         setIsLoading(false);
-        window.location.href = "/sign-in";
+        if (error.message === '{"detail": "Invalid credentials"}') {
+          window.location.href = "/sign-in";
+        } else {
+          setError(error.message);
+        }
       });
   }, []);
 
@@ -79,7 +82,12 @@ const ArtistList = () => {
   };
 
   // Show loading or error message if necessary
-  if (isLoading) return <div className="text-white"><Spinner /></div>;
+  if (isLoading)
+    return (
+      <div className="text-white">
+        <Spinner />
+      </div>
+    );
   if (error) return <div className="text-white">Error: {error}</div>;
 
   // Calculate which artists to display on the current page
@@ -131,7 +139,6 @@ const ArtistList = () => {
                 <h3 className="text-lg ml-6 font-bold p-2 overflow-hidden text-overflow-ellipsis whitespace-nowrap">
                   {artist}
                 </h3>
-
               </Card>
             </Link>
           ))
