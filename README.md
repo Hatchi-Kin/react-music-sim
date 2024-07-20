@@ -23,63 +23,65 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 ```bash
 .
+├── .github
+│   └── workflows
+│       └── deploy_aspire.yaml
+│
 ├── app
 │   ├── (auth)
 │   │   └── (routes)
 │   │       ├── layout.tsx
 │   │       ├── sign-in
-│   │       │   └── page.tsx
 │   │       └── sign-up
-│   │           └── page.tsx
 │   │
 │   ├── (homepage)
 │   │   └── homepage
-│   │       ├── albumsByArtist
-│   │       │   └── page.tsx
-│   │       ├── byartist
-│   │       │   └── page.tsx
-│   │       ├── random-song
-│   │       │   └── page.tsx
-│   │       ├── similar-song
-│   │       │   └── page.tsx
-│   │       ├── similar-spotinite
-│   │       │   └── page.tsx
-│   │       ├── tracklist
-│   │       │   └── page.tsx
-│   │       ├── layout.tsx
-|   │       │
 │   │       ├── page.tsx
-│   │       └── random-song
-│   │           └── page.tsx
+│   │       ├── layout.tsx
+│   │       │
+│   │       ├── albumsByArtist
+│   │       ├── byartist
+│   │       ├── random-song
+│   │       ├── similar-songs
+│   │       ├── similar-spotinite
+│   │       ├── similar-to-user-uploads
+│   │       ├── tracklist
+│   │       ├── user-favorites
+│   │       └── user-uploads
 │   │
 │   ├── (landingpage)
 │   │   ├── LandingLayout.tsx
 │   │   └── page.tsx
 │   │
-│   ├── node_modules
-│   ├── layout.tsx
 │   ├── favicon.ico
-│   └──globals.css
+│   ├── global.css
+│   ├── globals.css
+│   └── layout.tsx
 │
 ├── components
+│   ├── AddRemoveFavoritesButton.tsx
 │   ├── AddToPlayList.tsx
 │   ├── AlbumsByArtist.tsx
-│   ├── AllArtist.tsx
+│   ├── AllArtists.tsx
 │   ├── Box.tsx
 │   ├── Button.tsx
-│   ├── GenrePlots.tsx
+│   ├── GenresPlots.tsx
 │   ├── Header.tsx
 │   ├── LandingHero.tsx
 │   ├── LandingNavbar.tsx
 │   ├── ListItem.tsx
 │   ├── MusicPlayer.tsx
+│   ├── MyFavorites.tsx
 │   ├── ParticuleRing.tsx
 │   ├── RandomSong.tsx
 │   ├── Sidebar.tsx
 │   ├── Sidebaritem.tsx
+│   ├── SimilarSongs.tsx
+│   ├── SimilarToUserUploadsSongs.tsx
 │   ├── Spinner.tsx
 │   ├── SpotiniteSimilar.tsx
-│   ├── Tracklist.tsx
+│   ├── TrackList.tsx
+│   ├── UserUploads.tsx
 │   └── ui
 │       ├── button.tsx
 │       ├── card.tsx
@@ -100,23 +102,25 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 ├── lib
 │   └── utils.ts
 │
-├── components.json
-├── docker-compose.yaml
-├── Dockerfile
-├── next.config.mjs
-├── next-env.d.ts
+├── .dockerignore
+├── .gitignore
+├── .prettierrc
+├── .eslintrc.json
 ├── package.json
 ├── package-lock.json
-├── postcss.config.js
-├── public
 ├── tsconfig.json
+├── components.json
+├── postcss.config.js
 ├── tailwind.config.ts
+├── next.config.mjs
+├── Dockerfile
+├── docker-compose.yaml
 └── README.md
 ```
 
 ## Le workflow gh action
 
-pour que le pi puisse ssh into gh
+pour que le server puisse ssh into gh
 
 creer un fichier config dans `/home/pi/.ssh/config` avec:
 ```

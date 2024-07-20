@@ -63,8 +63,12 @@ const SimilarToUserUploadsSongs = () => {
         setIsLoading(false);
       })
       .catch((error) => {
-        setError(error.message);
         setIsLoading(false);
+        if (error.message === '{"detail": "Invalid credentials"}') {
+          window.location.href = "/sign-in";
+        } else {
+          setError(error.message);
+        }
       });
   }, [filename]); 
 

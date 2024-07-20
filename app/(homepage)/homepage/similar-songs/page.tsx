@@ -1,6 +1,7 @@
 "use client";
 
 import SimilarSongs from "@/components/SimilarSongs";
+import Header from "@/components/Header";
 
 export default function ListTracks() {
   return (
@@ -14,6 +15,7 @@ export default function ListTracks() {
         flex-col
       "
     >
+      <Header>Headers</Header>
       <div>
         <SimilarSongs />
       </div>

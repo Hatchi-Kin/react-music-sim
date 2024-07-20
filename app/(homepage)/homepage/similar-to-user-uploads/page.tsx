@@ -1,6 +1,7 @@
 "use client";
 
 import SimilarToUserUploadsSongs from "@/components/SimilarToUserUploadsSongs";
+import Header from "@/components/Header";
 
 export default function SimilarUserUploadsSongs() {
   return (
@@ -14,6 +15,7 @@ export default function SimilarUserUploadsSongs() {
         flex-col
       "
     >
+      <Header>Headers</Header>
       <div>
         <SimilarToUserUploadsSongs />
       </div>

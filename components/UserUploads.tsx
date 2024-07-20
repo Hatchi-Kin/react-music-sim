@@ -44,8 +44,12 @@ const UserUploadsList = () => {
         setIsLoading(false);
       })
       .catch((error) => {
-        setError(error.message);
         setIsLoading(false);
+        if (error.message === '{"detail": "Invalid credentials"}') {
+          window.location.href = "/sign-in";
+        } else {
+          setError(error.message);
+        }
       });
   }, [token, baseUrl]);
 
@@ -158,9 +162,35 @@ const UserUploadsList = () => {
     }, 3000);
   };
 
-  const redirectToSimilarSongs = (filename: string) => {
-    const encodedFilename = encodeURIComponent(filename);
-    window.location.href = `/homepage/similar-to-user-uploads?filename=${encodedFilename}`;
+  const checkEmbeddingsExtracted = async (filename: string) => {
+    try {
+      const response = await fetch(
+        `${baseUrl}/minio/emb_extracted/${encodeURIComponent(filename)}`,
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const data = await response.json();
+      return data.extracted;
+    } catch (error) {
+      console.error("Failed to check embeddings status:", error);
+      return false; // Assume not extracted on error to prevent incorrect redirection
+    }
+  };
+
+  const redirectToSimilarSongs = async (filename: string) => {
+    const extracted = await checkEmbeddingsExtracted(filename);
+    if (extracted) {
+      const encodedFilename = encodeURIComponent(filename);
+      window.location.href = `/homepage/similar-to-user-uploads?filename=${encodedFilename}`;
+    } else {
+      // Show notification that embeddings need to be extracted first
+      showNotification("Please extract embeddings first.", "error");
+    }
   };
 
   if (isLoading)

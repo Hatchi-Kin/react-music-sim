@@ -50,8 +50,12 @@ const RandomSongCard = () => {
         setIsLoading(false);
       })
       .catch((error) => {
-        setError(error.message);
         setIsLoading(false);
+        if (error.message.includes("Invalid credentials")) {
+          window.location.href = "/sign-in";
+        } else {
+          setError(error.message);
+        }
       });
   }, []);
 
