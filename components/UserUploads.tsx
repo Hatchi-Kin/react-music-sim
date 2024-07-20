@@ -3,6 +3,10 @@ import { Card } from "@/components/ui/card";
 import Spinner from "@/components/Spinner";
 import { Button } from "@/components/ui/button";
 
+type ExtractingState = {
+  [key: string]: "loading" | "success" | null;
+};
+
 const UserUploadsList = () => {
   const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
   const token = typeof window !== "undefined" ? localStorage.getItem("authToken") ?? "" : "";
@@ -12,6 +16,7 @@ const UserUploadsList = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [uploadSuccess, setUploadSuccess] = useState(false);
   const [notification, setNotification] = useState({ message: "", type: "" });
+  const [extracting, setExtracting] = useState<ExtractingState>({});
 
   const fetchUploads = useCallback(() => {
     setIsLoading(true);
@@ -100,6 +105,7 @@ const UserUploadsList = () => {
   // function to call api to fetch embeddings endpoint POST openl3/embeddings/
   async function handleExtractEmbeddings(filePath: string) {
     try {
+      setExtracting((prev) => ({ ...prev, [filePath]: "loading" }));
       const response = await fetch(`${baseUrl}/openl3/embeddings/?file_path=${filePath}`, {
         method: "POST",
         headers: {
@@ -112,10 +118,11 @@ const UserUploadsList = () => {
         throw new Error("Failed to extract embeddings");
       }
 
-      showNotification("Embeddings extracted successfully");
+      setExtracting((prev) => ({ ...prev, [filePath]: "success" }));
+      setTimeout(() => setExtracting((prev) => ({ ...prev, [filePath]: null })), 3000); // Hide success message after 3 seconds
     } catch (error) {
       console.error("Error extracting embeddings:", error);
-      showNotification("Error extracting embeddings", "error");
+      setExtracting((prev) => ({ ...prev, [filePath]: null }));
     }
   }
 
@@ -151,6 +158,11 @@ const UserUploadsList = () => {
     }, 3000);
   };
 
+  const redirectToSimilarSongs = (filename: string) => {
+    const encodedFilename = encodeURIComponent(filename);
+    window.location.href = `/homepage/similar-to-user-uploads?filename=${encodedFilename}`;
+  };
+
   if (isLoading)
     return (
       <div className="text-white">
@@ -184,13 +196,20 @@ const UserUploadsList = () => {
             <div className="flex flex-col sm:flex-row justify-between items-center">
               <div className="sm:w-1/2">{upload}</div>
               <div className="flex flex-col sm:flex-row space-x-0 sm:space-x-4 mt-4 sm:mt-0">
+                {extracting[upload] === "loading" && <Spinner size="tiny" />}
+                {extracting[upload] === "success" && <div>Embeddings extracted successfully</div>}
+                {extracting[upload] !== "loading" && (
+                  <Button
+                    onClick={() => handleExtractEmbeddings(upload)}
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-2 sm:mb-0"
+                  >
+                    Extract Embeddings
+                  </Button>
+                )}
                 <Button
-                  onClick={() => handleExtractEmbeddings(upload)}
+                  onClick={() => redirectToSimilarSongs(upload)} // Updated onClick handler
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-2 sm:mb-0"
                 >
-                  Extract Embeddings
-                </Button>
-                <Button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-2 sm:mb-0">
                   Similar Songs
                 </Button>
                 <Button
