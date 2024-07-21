@@ -45,11 +45,14 @@ const SimilarToUserUploadsSongs = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        filepath: filename, 
+        filepath: filename,
       }),
     })
       .then((response) => {
         if (!response.ok) {
+          if (response.status === 401) {
+            window.location.href = "/sign-in";
+          }
           throw new Error(`Network response was not ok: ${response.statusText}`);
         }
         return response.json();
@@ -64,13 +67,9 @@ const SimilarToUserUploadsSongs = () => {
       })
       .catch((error) => {
         setIsLoading(false);
-        if (error.message === '{"detail": "Invalid credentials"}') {
-          window.location.href = "/sign-in";
-        } else {
-          setError(error.message);
-        }
+        setError(error.message);
       });
-  }, [filename]); 
+  }, [filename]);
 
   // Call fetchSimilarSongs only when filename is set
   useEffect(() => {

@@ -13,7 +13,7 @@ const MusicPlayer = () => {
 
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [shouldFetchSong, setShouldFetchSong] = useState(true);
-  const [volume, setVolume] = useState(50);
+  const [volume, setVolume] = useState(40);
 
   const fetchSong = async (song: string) => {
     const token = localStorage.getItem("authToken") ?? "";
@@ -33,21 +33,29 @@ const MusicPlayer = () => {
     if (response.ok) {
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);
-      setSongUrl(url);
+      setSongUrl(url); 
     }
   };
 
   useEffect(() => {
     if (playlist.length > 0 && shouldFetchSong) {
       fetchSong(playlist[currentSongIndex]).then(() => {
-        if (audioRef.current) {
-          audioRef.current.play();
-          setIsPlaying(true);
-        }
         setShouldFetchSong(false); // Reset the flag after fetching the song
       });
     }
   }, [playlist, currentSongIndex, shouldFetchSong]);
+
+  useEffect(() => {
+    if (songUrl && audioRef.current) {
+      const play = async () => {
+        if (audioRef.current) {
+          await audioRef.current.play();
+          setIsPlaying(true);
+        }
+      };
+      play().catch((error) => console.error("Error playing the song:", error));
+    }
+  }, [songUrl]);
 
   const handleSongEnd = () => {
     if (currentSongIndex < playlist.length - 1) {
@@ -73,6 +81,7 @@ const MusicPlayer = () => {
     if (currentSongIndex > 0) {
       setCurrentSongIndex(currentSongIndex - 1);
       setShouldFetchSong(true); // Set the flag to fetch a new song
+      setIsPlaying(false); // Reset play state
     }
   };
 
@@ -86,6 +95,7 @@ const MusicPlayer = () => {
       setCurrentSongIndex(0);
     }
     setShouldFetchSong(true);
+    setIsPlaying(false); // Reset play state
   };
 
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -41,7 +41,7 @@ const SimilarSongs = () => {
     })
       .then((response) => {
         if (!response.ok) {
-          if (response.statusText === "Unauthorized") {
+          if (response.status === 401) {
             window.location.href = "/sign-in";
           } else {
             throw new Error(`Network response was not ok: ${response.statusText}`);
@@ -59,11 +59,7 @@ const SimilarSongs = () => {
       })
       .catch((error) => {
         setIsLoading(false);
-        if (error.message === '{"detail": "Invalid credentials"}') {
-          window.location.href = "/sign-in";
-        } else {
-          setError(error.message);
-        }
+        setError(error.message);
       });
   }, [songPath]);
 

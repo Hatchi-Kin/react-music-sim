@@ -30,7 +30,11 @@ const UserUploadsList = () => {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error(`Network response was not ok: ${response.statusText}`);
+          if (response.status === 401) {
+            window.location.href = "/sign-in";
+          } else {
+            throw new Error(`Network response was not ok: ${response.statusText}`);
+          }
         }
         return response.json();
       })
@@ -45,11 +49,7 @@ const UserUploadsList = () => {
       })
       .catch((error) => {
         setIsLoading(false);
-        if (error.message === '{"detail": "Invalid credentials"}') {
-          window.location.href = "/sign-in";
-        } else {
-          setError(error.message);
-        }
+        setError(error.message);
       });
   }, [token, baseUrl]);
 
@@ -72,6 +72,7 @@ const UserUploadsList = () => {
   };
 
   const uploadFile = (file: File) => {
+    setIsLoading(true); // Start loading state
     const formData = new FormData();
     formData.append("file", file);
 
@@ -85,24 +86,24 @@ const UserUploadsList = () => {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          if (response.status === 401) {
+            window.location.href = "/sign-in"; // Redirect to sign-in if token is expired or invalid
+          } else {
+            throw new Error("Network response was not ok");
+          }
         }
         return response.json();
       })
       .then((data) => {
         console.log("Upload successful", data);
-        setSelectedFile(null);
-        setUploadSuccess(true);
-        fetchUploads();
-        setTimeout(() => setUploadSuccess(false), 5000);
+        setSelectedFile(null); // Clear selected file
+        setUploadSuccess(true); // Indicate upload success
+        fetchUploads(); // Refresh uploads list
+        setTimeout(() => setUploadSuccess(false), 5000); // Reset success state after 5 seconds
       })
       .catch((error) => {
-        setIsLoading(false);
-        if (error.message === '{"detail": "Invalid credentials"}') {
-          window.location.href = "/sign-in";
-        } else {
-          setError(error.message);
-        }
+        setIsLoading(false); // Stop loading state
+        setError(error.message); // Set error message
       });
   };
 
@@ -119,7 +120,11 @@ const UserUploadsList = () => {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to extract embeddings");
+        if (response.status === 401) {
+          window.location.href = "/sign-in"; // Redirect to sign-in if token is expired or invalid
+        } else {
+          throw new Error("Failed to extract embeddings");
+        }
       }
 
       setExtracting((prev) => ({ ...prev, [filePath]: "success" }));
@@ -142,10 +147,12 @@ const UserUploadsList = () => {
       });
 
       if (!response.ok) {
+        if (response.status === 401) {
+          window.location.href = "/sign-in";
+          return;
+        }
         throw new Error("Failed to delete the file");
       }
-
-      // Optionally, remove the file from the uploads state to update the UI
       setUploads(uploads.filter((file) => file !== filePath));
 
       showNotification("File deleted successfully");
@@ -174,6 +181,10 @@ const UserUploadsList = () => {
           },
         }
       );
+      if (response.status === 401) {
+        window.location.href = "/sign-in";
+        return false;
+      }
       const data = await response.json();
       return data.extracted;
     } catch (error) {

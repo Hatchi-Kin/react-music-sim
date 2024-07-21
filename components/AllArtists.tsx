@@ -31,7 +31,11 @@ const ArtistList = () => {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error(`Network response was not ok: ${response.statusText}`);
+          if (response.status === 401) {
+            window.location.href = "/sign-in";
+          } else {
+            throw new Error(`Network response was not ok: ${response.statusText}`);
+          }
         }
         return response.json();
       })
@@ -45,12 +49,9 @@ const ArtistList = () => {
         setIsLoading(false);
       })
       .catch((error) => {
+        console.error(error); // Log the error
         setIsLoading(false);
-        if (error.message === '{"detail": "Invalid credentials"}') {
-          window.location.href = "/sign-in";
-        } else {
-          setError(error.message);
-        }
+        setError(error.message);
       });
   }, []);
 

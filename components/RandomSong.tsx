@@ -41,7 +41,11 @@ const RandomSongCard = () => {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          if (response.status === 401) {
+            window.location.href = "/sign-in";
+          } else {
+            throw new Error("Network response was not ok");
+          }
         }
         return response.json();
       })
@@ -51,11 +55,7 @@ const RandomSongCard = () => {
       })
       .catch((error) => {
         setIsLoading(false);
-        if (error.message.includes("Invalid credentials")) {
-          window.location.href = "/sign-in";
-        } else {
-          setError(error.message);
-        }
+        setError(error.message);
       });
   }, []);
 

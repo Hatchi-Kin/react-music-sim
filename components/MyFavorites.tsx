@@ -41,12 +41,16 @@ const ManageMyFavorites = () => {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error(`Network response was not ok: ${response.statusText}`);
+          if (response.status === 401) {
+            window.location.href = "/sign-in";
+          } else {
+            throw new Error(`Network response was not ok: ${response.statusText}`);
+          }
         }
         return response.json();
       })
       .then((data) => {
-        setRawResponse(data); // Save the raw response data
+        setRawResponse(data);
         if (Array.isArray(data)) {
           setSongs(data);
         } else {
@@ -55,7 +59,7 @@ const ManageMyFavorites = () => {
         setIsLoading(false);
       })
       .catch((error) => {
-        console.error(error); // Log any errors
+        console.error(error);
         setError(error.message);
         setIsLoading(false);
       });
