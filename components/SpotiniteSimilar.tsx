@@ -40,7 +40,9 @@ const SimilarSpotiniteTracks = () => {
     })
       .then((response) => {
         if (!response.ok) {
-          if (response.status === 400) {
+          if (response.status === 401) {
+            window.location.href = "/sign-in"; // Redirect to sign-in if token is expired or invalid
+          } else if (response.status === 400) {
             // Check if the status is 400
             return response.json().then((data) => {
               if (data.detail === "list index out of range") {
@@ -71,11 +73,7 @@ const SimilarSpotiniteTracks = () => {
       })
       .catch((error) => {
         setIsLoading(false);
-        if (error.message === '{"detail": "Invalid credentials"}') {
-          window.location.href = "/sign-in";
-        } else {
-          setError(error.message);
-        }
+        setError(error.message);
       });
   }, [trackName, artistName]);
 

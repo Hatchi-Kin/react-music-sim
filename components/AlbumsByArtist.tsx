@@ -34,7 +34,11 @@ const AlbumsByArtist = () => {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error(`Network response was not ok: ${response.statusText}`);
+          if (response.status === 401) {
+            window.location.href = "/sign-in";
+          } else {
+            throw new Error(`Network response was not ok: ${response.statusText}`);
+          }
         }
         return response.json();
       })
@@ -47,9 +51,9 @@ const AlbumsByArtist = () => {
         setIsLoading(false);
       })
       .catch((error) => {
+        console.error(error); // Log the error
         setError(error.message);
         setIsLoading(false);
-        window.location.href = "/sign-in";
       });
   }, [artistFolder]);
 

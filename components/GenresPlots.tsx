@@ -24,7 +24,11 @@ const PlotGenres: React.FC<PlotGenresProps> = ({ songPath }) => {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error(`Network response was not ok: ${response.statusText}`);
+          if (response.status === 401) {
+            window.location.href = "/sign-in";
+          } else {
+            throw new Error(`Network response was not ok: ${response.statusText}`);
+          }
         }
         return response.text(); // Use text() instead of json() if the response is a plain string
       })
