@@ -213,7 +213,7 @@ const UserUploadsList = () => {
   if (error) return <div className="text-white">Error: {error}</div>;
 
   return (
-    <div className="h-screen overflow-auto pb-32 mt-16">
+    <div className="h-screen overflow-auto pb-32 mt-16 px-4 sm:px-0">
       <div className="mb-12 mx-auto sm:mx-12">
         <input
           type="file"
@@ -234,28 +234,28 @@ const UserUploadsList = () => {
       {uploads.map((upload, index) => (
         <div key={index} className="mb-4 mx-6">
           <Card className="bg-[#111827] rounded-lg border-gray-700 text-slate-300 shadow-lg p-4">
-            <div className="flex flex-col sm:flex-row justify-between items-center">
-              <div className="sm:w-1/2">{upload}</div>
-              <div className="flex flex-col sm:flex-row space-x-0 sm:space-x-4 mt-4 sm:mt-0">
+            <div className="flex flex-col sm:flex-row flex-wrap justify-between items-center">
+              <div className="w-full sm:w-1/2 mb-2 sm:mb-2">{upload}</div>
+              <div className="flex flex-col sm:flex-row flex-wrap space-x-0 sm:space-x-4 mt-4 sm:mt-0">
                 {extracting[upload] === "loading" && <Spinner size="tiny" />}
                 {extracting[upload] === "success" && <div>Embeddings extracted successfully</div>}
                 {extracting[upload] !== "loading" && (
                   <Button
                     onClick={() => handleExtractEmbeddings(upload)}
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-2 sm:mb-0"
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-2 sm:mb-0 w-full sm:w-auto"
                   >
                     Extract Embeddings
                   </Button>
                 )}
                 <Button
                   onClick={() => redirectToSimilarSongs(upload)} // Updated onClick handler
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-2 sm:mb-0"
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-2 sm:mb-2 w-full sm:w-auto"
                 >
                   Similar Songs
                 </Button>
                 <Button
                   onClick={() => handleDeleteFile(upload)}
-                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full sm:w-auto"
                 >
                   Delete
                 </Button>

@@ -7,16 +7,14 @@ import { useArtist } from "@/contexts/ArtistContext";
 import Spinner from "@/components/Spinner";
 
 const ArtistList = () => {
-  // State variables for artists, loading status, error message, and current page
   const [artists, setArtists] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
-  const itemsPerPage = 33;
+  const [itemsPerPage, setItemsPerPage] = useState(33);
 
-  const { setArtistName } = useArtist(); // hook to get the setArtistName function
+  const { setArtistName } = useArtist();
 
-  // Function to fetch artists from the API
   const fetchArtist = useCallback(() => {
     setIsLoading(true);
     const token = localStorage.getItem("authToken") ?? "";
@@ -49,18 +47,31 @@ const ArtistList = () => {
         setIsLoading(false);
       })
       .catch((error) => {
-        console.error(error); // Log the error
+        console.error(error);
         setIsLoading(false);
         setError(error.message);
       });
   }, []);
 
-  // Fetch artists when the component mounts
   useEffect(() => {
     fetchArtist();
   }, [fetchArtist]);
 
-  // Function to handle clicking the "Next" button
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setItemsPerPage(10);
+      } else {
+        setItemsPerPage(33);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const handleNextPage = () => {
     setPage((prevPage) => {
       const nextPage = prevPage + 1;
@@ -71,7 +82,6 @@ const ArtistList = () => {
     });
   };
 
-  // Function to handle clicking the "Prev" button
   const handlePrevPage = () => {
     setPage((prevPage) => {
       const newPrevPage = prevPage - 1;
@@ -82,7 +92,6 @@ const ArtistList = () => {
     });
   };
 
-  // Show loading or error message if necessary
   if (isLoading)
     return (
       <div className="text-white">
@@ -91,15 +100,12 @@ const ArtistList = () => {
     );
   if (error) return <div className="text-white">Error: {error}</div>;
 
-  // Calculate which artists to display on the current page
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const artistsToDisplay = artists.slice(startIndex, endIndex);
 
-  // Render the component
   return (
     <div>
-      {/* Navigation buttons */}
       <div className="flex justify-center space-x-4 mt-6 mb-4">
         <Button
           onClick={handlePrevPage}
@@ -114,19 +120,16 @@ const ArtistList = () => {
           Next <FaArrowRight className="ml-2" />
         </Button>
       </div>
-      {/* Artist cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-5 p-7">
         {artistsToDisplay.length > 0 ? (
           artistsToDisplay.map((artist, index) => (
-            // Include the artist's name as a URL parameter
             <Link href={`/homepage/albumsByArtist?page=${encodeURIComponent(artist)}`} key={index}>
               <Card
-                onClick={() => setArtistName(artist)} // set the artist name when the card is clicked
+                onClick={() => setArtistName(artist)}
                 className="
                   bg-[#111827] 
                   rounded-lg 
-                  ml-2
-                  mr-2
+                  mx-2
                   border-gray-700 
                   text-slate-300 
                   shadow-lg 
@@ -137,9 +140,7 @@ const ArtistList = () => {
                   transition-colors 
                   duration-300"
               >
-                <h3 className="text-lg ml-6 font-bold p-2 overflow-hidden text-overflow-ellipsis whitespace-nowrap">
-                  {artist}
-                </h3>
+                <h3 className="text-lg font-bold p-2 truncate">{artist}</h3>
               </Card>
             </Link>
           ))
@@ -147,7 +148,6 @@ const ArtistList = () => {
           <p>No artists available</p>
         )}
       </div>
-      {/* Navigation buttons */}
       <div className="flex justify-center space-x-4 mt-4 mb-12">
         <Button
           onClick={handlePrevPage}

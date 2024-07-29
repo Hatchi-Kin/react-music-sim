@@ -96,12 +96,14 @@ const SimilarSpotiniteTracks = () => {
         className="
           bg-[#111827] 
           rounded-lg 
-          mt-20 mb-12
+          mt-20 mb-12 
           border-gray-700 
           text-slate-300 
           shadow-lg 
           p-8
-          w-1/2
+          w-full
+          md:w-3/4 
+          lg:w-1/2
           mx-auto"
       >
         <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
@@ -127,7 +129,7 @@ const SimilarSpotiniteTracks = () => {
             <div className="text-center mt-8">
               <Button
                 type="submit"
-                className=" py-2 px-4 bg-sky-600 text-white rounded-md hover:bg-sky-700 inline-block"
+                className="py-2 px-4 bg-sky-600 text-white rounded-md hover:bg-sky-700 inline-block"
               >
                 Search
               </Button>
@@ -136,23 +138,22 @@ const SimilarSpotiniteTracks = () => {
         </form>
       </Card>
 
-      <div className="grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-3 gap-6 mt-8 p-7">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mt-8 p-7">
         {tracks.length > 0
           ? tracks.map((track, index) => (
               <Card
                 key={index}
                 className="
                   flex
+                  flex-col
+                  md:flex-row
                   items-center
-                  justify-center
                   bg-[#111827] 
                   rounded-lg 
-                  ml-2
-                  mr-2
                   border-gray-700 
                   text-slate-300 
                   shadow-lg 
-                  p-4 "
+                  p-4"
               >
                 <Image
                   src={track["Cover Image"]}
@@ -161,10 +162,10 @@ const SimilarSpotiniteTracks = () => {
                   height={250}
                   className="max-w-full h-auto"
                 />
-                <div className="overflow-auto">
-                  <h3 className="mb-4 ml-4 font-semibold">{track["Track Name"]}</h3>
-                  <p className="mb-4 ml-4"> {track.Artist}</p>
-                  <p className="mb-4 ml-4">{track.Album}</p>
+                <div className="mt-4 md:mt-0 md:ml-4 overflow-auto">
+                  <h3 className="mb-2 font-semibold">{track["Track Name"]}</h3>
+                  <p className="mb-2">{track.Artist}</p>
+                  <p className="mb-2">{track.Album}</p>
                 </div>
               </Card>
             ))

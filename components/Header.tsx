@@ -28,93 +28,88 @@ const Header: React.FC<HeaderProps> = ({ children, className, title }) => {
 
   return (
     <div className={twMerge(`h-fit bg-gradient-to-b from-slate-800 p-6`, className)}>
-      <div className={twMerge(`flex justify-between gap-x-4 items-center`)}>
+      <div className={twMerge(`flex flex-col md:flex-row justify-between gap-4 items-center`)}>
         <div>
-          {title && <h1 className={twMerge(`
-          text-slate-300 
-          text-4xl 
-          space-x-4
-          font-bold
-          uppercase 
-          bg-gradient-to-r 
-          from-sky-800 via-sky-500 to-sky-200  
-          bg-clip-text 
-          text-transparent`)}>{title}</h1>}
+          {title && (
+            <h1
+              className={twMerge(`
+                text-slate-300 
+                text-4xl 
+                space-x-4
+                font-bold
+                uppercase 
+                bg-gradient-to-r 
+                from-sky-800 via-sky-500 to-sky-200  
+                bg-clip-text 
+                text-transparent
+              `)}
+            >
+              {title}
+            </h1>
+          )}
         </div>
-        <div className={twMerge(`flex items-center gap-x-4`)}>
-          <div className={twMerge(`flex-col justify-start gap-x-4`)}>
-            <Link href="/homepage">
-              <button
-                className={twMerge(`
-                  border-2 md:hidden justify-center bg-slate-400 rounded-full flex p-2 hover:opacity-75 transition
-                  `)}
-              >
-                <HiHome className={twMerge(`text-black`)} size={30} />
-              </button>
-            </Link>
-          </div>
-          <div className={twMerge(`flex-col justify-start gap-x-4`)}>
-            <Link href="/homepage/random-song">
-              <button
-                className={twMerge(`
-                  border-2  md:hidden justify-center bg-slate-400 rounded-full flex p-2 hover:opacity-75 transition
-                  `)}
-              >
-                <LiaDiceD6Solid className={twMerge(`text-black`)} size={30} />
-              </button>
-            </Link>
-          </div>
-          <div className={twMerge(`flex-col justify-start gap-x-4`)}>
-            <Link href="/homepage/similar-spotinite">
-              <button
-                className={twMerge(`
-                  border-2 md:hidden justify-center bg-slate-400 rounded-full flex p-2 hover:opacity-75 transition
-                `)}
-              >
-                <BiDice3 className={twMerge(`text-black`)} size={30} />
-              </button>
-            </Link>
-          </div>
-          <div className={twMerge(`flex-col justify-start gap-x-4`)}>
-            <Link href="/homepage/byartist">
-              <button
-                className={twMerge(`
-                  border-2  md:hidden justify-center bg-slate-400 rounded-full flex p-2 hover:opacity-75 transition
-                  `)}
-              >
-                <BiHeadphone className={twMerge(`text-black`)} size={30} />
-              </button>
-            </Link>
-          </div>
-          <div className={twMerge(`flex-col justify-start gap-x-4`)}>
-            <Link href="/homepage/user-favorites">
-              <button
-                className={twMerge(`
-                  border-2  md:hidden justify-center bg-slate-400 rounded-full flex p-2 hover:opacity-75 transition
-                  `)}
-              >
-                <MdFavorite className={twMerge(`text-black`)} size={30} />
-              </button>
-            </Link>
-          </div>
-          <div className={twMerge(`flex-col justify-start gap-x-4`)}>
-            <Link href="/homepage/user-uploads">
-              <button
-                className={twMerge(`
-                  border-2  md:hidden justify-center bg-slate-400 rounded-full flex p-2 hover:opacity-75 transition
-                  `)}
-              >
-                <MdCloudUpload className={twMerge(`text-black`)} size={30} />
-              </button>
-            </Link>
-          </div>
+        <div className={twMerge(`flex flex-wrap justify-center md:justify-end gap-2`)}>
+          <Link href="/homepage">
+            <button
+              className={twMerge(`
+                border-2 md:hidden justify-center bg-slate-400 rounded-full flex p-2 hover:opacity-75 transition
+              `)}
+            >
+              <HiHome className={twMerge(`text-black`)} size={30} />
+            </button>
+          </Link>
+          <Link href="/homepage/random-song">
+            <button
+              className={twMerge(`
+                border-2 md:hidden justify-center bg-slate-400 rounded-full flex p-2 hover:opacity-75 transition
+              `)}
+            >
+              <LiaDiceD6Solid className={twMerge(`text-black`)} size={30} />
+            </button>
+          </Link>
+          <Link href="/homepage/similar-spotinite">
+            <button
+              className={twMerge(`
+                border-2 md:hidden justify-center bg-slate-400 rounded-full flex p-2 hover:opacity-75 transition
+              `)}
+            >
+              <BiDice3 className={twMerge(`text-black`)} size={30} />
+            </button>
+          </Link>
+          <Link href="/homepage/byartist">
+            <button
+              className={twMerge(`
+                border-2 md:hidden justify-center bg-slate-400 rounded-full flex p-2 hover:opacity-75 transition
+              `)}
+            >
+              <BiHeadphone className={twMerge(`text-black`)} size={30} />
+            </button>
+          </Link>
+          <Link href="/homepage/user-favorites">
+            <button
+              className={twMerge(`
+                border-2 md:hidden justify-center bg-slate-400 rounded-full flex p-2 hover:opacity-75 transition
+              `)}
+            >
+              <MdFavorite className={twMerge(`text-black`)} size={30} />
+            </button>
+          </Link>
+          <Link href="/homepage/user-uploads">
+            <button
+              className={twMerge(`
+                border-2 md:hidden justify-center bg-slate-400 rounded-full flex p-2 hover:opacity-75 transition
+              `)}
+            >
+              <MdCloudUpload className={twMerge(`text-black`)} size={30} />
+            </button>
+          </Link>
         </div>
-        <div className={twMerge(`flex-col-reverse justify-end gap-x-4`)}>
+        <div className={twMerge(`flex justify-end gap-2 mt-4 md:mt-0`)}>
           <Button
             onClick={handlelogout}
             className={twMerge(`
-            flex items-center space-x-2  border-2 border-slate-300 text-slate-300 rounded-xl px-4 py-2 hover:bg-amber-950 transition
-          `)}
+              flex items-center space-x-2 border-2 border-slate-300 text-slate-300 rounded-xl px-4 py-2 hover:bg-amber-950 transition
+            `)}
           >
             <div>Logout</div>
             <div>

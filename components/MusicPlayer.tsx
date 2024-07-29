@@ -60,10 +60,10 @@ const MusicPlayer = () => {
   const handleSongEnd = () => {
     if (currentSongIndex < playlist.length - 1) {
       setCurrentSongIndex(currentSongIndex + 1);
+      setShouldFetchSong(true); // Set the flag to fetch a new song
     } else {
-      setCurrentSongIndex(0);
+      setIsPlaying(false); // Stop playing when the last song ends
     }
-    setShouldFetchSong(true); // Set the flag to fetch a new song
   };
 
   const togglePlay = async () => {
