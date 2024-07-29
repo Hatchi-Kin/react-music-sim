@@ -85,13 +85,13 @@ const SimilarSongs = () => {
         <span className="text-sky-500 font-extrabold">{artistName}</span>
       </h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mt-8 p-7">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 p-7">
         {songs.length > 0 ? (
           songs.map((song, index) => (
             <div
               key={index}
               className="bg-[#111827] rounded-lg ml-2 mr-2 border border-gray-700 text-slate-300 shadow-lg p-4 
-                          hover:bg-gradient-to-r from-sky-800 to-sky-600 transition-colors h-32 flex"
+                          hover:bg-gradient-to-r from-sky-800 to-sky-600 transition-colors h-48 flex flex-col"
             >
               <div className="flex-grow relative">
                 <Link href="/homepage/similar-songs">
@@ -103,24 +103,20 @@ const SimilarSongs = () => {
                     }}
                   >
                     <div className="flex justify-between items-center">
-                      <h3 className="text-lg font-bold text-slate-400 overflow-ellipsis overflow-hidden whitespace-nowrap max-w-xs">
+                      <h3 className="text-lg font-bold text-slate-400 break-words max-w-xs">
                         {song.title}
                       </h3>
+                      <div className="flex space-x-2 mt-4">
+                        <AddToPlayListButton song_full_path={song.path} size="small" />
+                        <AddRemoveFavoritesButton songPath={song.path} />
+                      </div>
                     </div>
-                    <div className="flex justify-between items-center mt-4">
-                      <p className="flex-grow ml-6 overflow-ellipsis overflow-hidden whitespace-nowrap max-w-xs">
-                        {song.artist}
-                      </p>
-                      <p className="flex-grow mr-6 overflow-ellipsis overflow-hidden whitespace-nowrap max-w-xs">
-                        {song.album}
-                      </p>
+                    <div className="flex flex-col justify-between items-start mt-4">
+                      <p className="break-words">{song.artist}</p>
+                      <p className="break-words mt-2">{song.album}</p>
                     </div>
                   </div>
                 </Link>
-              </div>
-              <div className="w-8">
-                <AddToPlayListButton song_full_path={song.path} size="small" />
-                <AddRemoveFavoritesButton songPath={song.path} />
               </div>
             </div>
           ))

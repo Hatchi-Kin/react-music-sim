@@ -76,7 +76,7 @@ const RandomSongCard = () => {
   if (!song) return <div className="text-white">No song found</div>;
 
   return (
-    <div>
+    <div className="mb-12">
       <div className="flex flex-col items-center mt-20">
         <button
           onClick={fetchRandomSong}
@@ -92,7 +92,7 @@ const RandomSongCard = () => {
           <GiPerspectiveDiceSixFacesRandom className="ml-3" size={24} />
         </button>
         {/* Display the current song */}
-        <div className="flex items-stretch gap-4 mt-4 mb-8 p-4 w-full max-w-4xl">
+        <div className="flex flex-col md:flex-row items-stretch gap-4 mt-4 mb-8 p-4 w-full max-w-4xl">
           <Card
             className={`bg-[#141b2c] rounded-lg border-gray-700 text-slate-300 shadow-lg p-6 ${song.artwork ? "grid grid-cols-3 gap-4" : ""} items-center h-84 w-full`}
           >
@@ -106,8 +106,7 @@ const RandomSongCard = () => {
               </p>
             </div>
             {song.artwork && (
-              <div style={{ position: "relative", width: "250px", height: "auto" }}>
-                {/* <div className="relative h-full mb-4 col-span-1"> */}
+              <div className="relative w-full md:w-64 h-auto">
                 <Image
                   src={`data:image/jpeg;base64,${song.artwork}`}
                   alt="Album Artwork"
@@ -121,7 +120,7 @@ const RandomSongCard = () => {
         </div>
 
         {/* Display the genre plot */}
-        <div className="relative h-full col-span-1 mb-12">
+        <div className="relative h-full col-span-1 mb-12 w-full max-w-4xl">
           <PlotGenres songPath={song.row.filepath} />
         </div>
         <div className="mb-4">
