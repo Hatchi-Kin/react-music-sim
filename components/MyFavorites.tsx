@@ -86,8 +86,7 @@ const ManageMyFavorites = () => {
               key={index}
               className="
                 flex
-                items-start
-                justify-between
+                flex-col
                 bg-[#111827] 
                 rounded-lg 
                 ml-2
@@ -97,6 +96,7 @@ const ManageMyFavorites = () => {
                 shadow-lg 
                 p-4 
                 mb-4
+                h-36
                 max-w-[90%] 
                 mx-auto 
                 "
@@ -115,19 +115,25 @@ const ManageMyFavorites = () => {
                         {song.title}
                       </h3>
                     </div>
-                    <div className="flex flex-col items-start">
-                      <p className="">{song.artist}</p>
-                      <p className="">{song.album}</p>
+                    <div className="grid grid-cols-4 gap-4 items-center">
+                      <div className="col-span-3">
+                        <p className="">{song.artist}</p>
+                        <p className="">{song.album}</p>
+                      </div>
+                      <div className="flex flex-col space-y-1 ml-auto">
+                        <div className="w-10 h-10">
+                          <AddToPlayListButton song_full_path={song.filepath} size="small" />
+                        </div>
+                        <div className="w-10 h-10">
+                          <AddRemoveFavoritesButton
+                            songPath={song.filepath}
+                            onRemove={() => setRefresh(!refresh)}
+                          />
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </Link>
-              </div>
-              <div className="m-4">
-                <AddToPlayListButton song_full_path={song.filepath} size="small" />
-                <AddRemoveFavoritesButton
-                  songPath={song.filepath}
-                  onRemove={() => setRefresh(!refresh)}
-                />
               </div>
             </Card>
           ))
