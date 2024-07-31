@@ -8,7 +8,7 @@ import { MdFavorite, MdCloudUpload } from "react-icons/md";
 import { LiaDiceD6Solid } from "react-icons/lia";
 import { FaUserAltSlash } from "react-icons/fa";
 import React from "react";
-import Button from "./Button";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 interface HeaderProps {
@@ -108,7 +108,7 @@ const Header: React.FC<HeaderProps> = ({ children, className, title }) => {
           <Button
             onClick={handlelogout}
             className={twMerge(`
-              flex items-center space-x-2 border-2 border-slate-300 text-slate-300 rounded-xl px-4 py-2 hover:bg-amber-950 transition
+              flex items-center space-x-2 border-2 bg-[#141c2e] border-slate-300 text-slate-300 rounded-xl px-4 py-2 hover:bg-amber-950 transition
             `)}
           >
             <div>Logout</div>

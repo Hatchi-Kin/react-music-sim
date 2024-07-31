@@ -4,7 +4,7 @@ import { MdOutlinePlaylistRemove, MdPlaylistAdd } from "react-icons/md";
 
 interface AddToPlayListButtonProps {
   song_full_path: string;
-  size?: "small" | "large";
+  size?: "small" | "medium" | "large";
 }
 
 const AddToPlayListButton: React.FC<AddToPlayListButtonProps> = ({
@@ -24,12 +24,24 @@ const AddToPlayListButton: React.FC<AddToPlayListButtonProps> = ({
   };
 
   const buttonClass = isInPlaylist
-    ? `bg-[#b38e4e] hover:bg-[#a67641] text-slate-300 font-bold ${size === "small" ? "py-0.5 px-1 text-xs" : "py-3 px-6 text-base"} rounded`
-    : `bg-[#46994f] hover:bg-[#287331] text-slate-300 font-bold ${size === "small" ? "py-0.5 px-1 text-xs" : "py-3 px-6 text-base"} rounded`;
+    ? `bg-[#b38e4e] hover:bg-[#a67641] text-slate-300 font-bold ${
+        size === "small"
+          ? "py-0.5 px-1 text-xs"
+          : size === "medium"
+            ? "w-6 h-6 flex items-center justify-center"
+            : "py-3 px-6 text-base"
+      } rounded`
+    : `bg-[#46994f] hover:bg-[#287331] text-slate-300 font-bold ${
+        size === "small"
+          ? "py-0.5 px-1 text-xs"
+          : size === "medium"
+            ? "w-6 h-6 flex items-center justify-center"
+            : "py-3 px-6 text-base"
+      } rounded`;
 
   return (
     <button onClick={handleClick} className={buttonClass}>
-      {size === "small" ? (
+      {size === "small" || size === "medium" ? (
         isInPlaylist ? (
           <MdOutlinePlaylistRemove />
         ) : (
