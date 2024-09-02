@@ -1,3 +1,15 @@
+# React-Music-Sim (Next.js, React, TypeScript, TailwindCSS)
+
+React-Music-Sim is a cutting-edge music recommendation web application. It allows authenticated users to explore a vast library of songs with a modern and intuitive interface. The application utilizes a Convolutional Neural Network (CNN) to predict song genres based on their spectrograms. These vector representations of songs are stored in a Vector Database (Milvus), which powers the similarity search feature to generate personalized music recommendations. Additionally, the app includes a fully functional music player and a playlist feature for an enhanced user experience.
+
+**Note:** This project relies on a backend server, which can be found here: [megapi](https://github.com/Hatchi-Kin/megapi).
+
+
+## Technologies Used
+
+- **Front-end:** React, Typescript, TailwindCSS
+- **Build and Development:** Next.js
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`].
 
 ## pour installer Next
