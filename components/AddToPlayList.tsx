@@ -1,6 +1,7 @@
 import React, { useContext, useMemo } from "react";
-import { PlayListContext } from "../contexts/PlayListContext";
+import { PlayListContext } from "@/contexts/PlayListContext";
 import { MdOutlinePlaylistRemove, MdPlaylistAdd } from "react-icons/md";
+import { Button } from "@/components/ui/button"; // Assuming this is the correct import for the ShadCN button
 
 interface AddToPlayListButtonProps {
   song_full_path: string;
@@ -13,7 +14,10 @@ const AddToPlayListButton: React.FC<AddToPlayListButtonProps> = ({
 }) => {
   const { playlist, addSong, removeSong } = useContext(PlayListContext);
 
-  const isInPlaylist = useMemo(() => playlist.includes(song_full_path), [playlist, song_full_path]);
+  const isInPlaylist = useMemo(
+    () => playlist.includes(song_full_path),
+    [playlist, song_full_path]
+  );
 
   const handleClick = () => {
     if (isInPlaylist) {
@@ -23,36 +27,17 @@ const AddToPlayListButton: React.FC<AddToPlayListButtonProps> = ({
     }
   };
 
-  const buttonClass = isInPlaylist
-    ? `bg-[#b38e4e] hover:bg-[#a67641] text-slate-300 font-bold ${
-        size === "small"
-          ? "py-0.5 px-1 text-xs"
-          : size === "medium"
-            ? "w-6 h-6 flex items-center justify-center"
-            : "py-3 px-6 text-base"
-      } rounded`
-    : `bg-[#46994f] hover:bg-[#287331] text-slate-300 font-bold ${
-        size === "small"
-          ? "py-0.5 px-1 text-xs"
-          : size === "medium"
-            ? "w-6 h-6 flex items-center justify-center"
-            : "py-3 px-6 text-base"
-      } rounded`;
+  const buttonText = isInPlaylist ? "Remove" : "Add to playlist";
+  const buttonIcon = isInPlaylist ? (
+    <MdOutlinePlaylistRemove />
+  ) : (
+    <MdPlaylistAdd />
+  );
 
   return (
-    <button onClick={handleClick} className={buttonClass}>
-      {size === "small" || size === "medium" ? (
-        isInPlaylist ? (
-          <MdOutlinePlaylistRemove />
-        ) : (
-          <MdPlaylistAdd />
-        )
-      ) : isInPlaylist ? (
-        "Remove"
-      ) : (
-        "Add to playlist"
-      )}
-    </button>
+    <Button size="lg" onClick={handleClick} className={'bg-black border border-gray-700 hover:bg-emerald-600'}>
+      {buttonText}
+    </Button>
   );
 };
 

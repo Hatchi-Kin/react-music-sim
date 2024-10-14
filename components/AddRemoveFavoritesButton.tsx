@@ -85,11 +85,11 @@ const AddRemoveFavoritesButton: React.FC<AddRemoveFavoritesButtonProps> = ({
   };
 
   return (
-    <Button size="sm" onClick={handleAddRemove} className="text-slate-200 bg-[#111827]">
+    <Button size="lg" onClick={handleAddRemove} className=" border border-gray-700 hover:bg-white ">
       {isFavorite ? (
-        <GiBrokenHeart color="grey" size={size} />
+        <GiBrokenHeart color="red" size={25} />
       ) : (
-        <MdFavorite color="red" size={size} />
+        <MdFavorite color="red" size={25}  />
       )}
     </Button>
   );

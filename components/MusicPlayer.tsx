@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { PlayListContext } from "../contexts/PlayListContext";
+import { PlayListContext } from "@/contexts/PlayListContext";
 import AddToPlayListButton from "../components/AddToPlayList";
 import { Card } from "@/components/ui/card";
 import { BiSkipNext, BiSkipPrevious } from "react-icons/bi";

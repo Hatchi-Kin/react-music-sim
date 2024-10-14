@@ -87,7 +87,7 @@ const ManageMyFavorites = () => {
               className="
                 flex
                 flex-col
-                bg-[#111827] 
+                bg-[#111827]
                 rounded-lg 
                 ml-2
                 mr-2
@@ -102,39 +102,43 @@ const ManageMyFavorites = () => {
                 "
             >
               <div className="flex-grow relative">
+
                 <Link href="/homepage/similar-songs">
                   <div
-                    className=""
+                    className=" flex-grow relative"
                     onClick={() => {
                       setsongPath(song.filepath);
                       setArtistName(song.artist);
                     }}
                   >
                     <div className="flex justify-between items-center w-full">
-                      <h3 className="text-lg font-bold text-slate-400 overflow-ellipsis overflow-hidden whitespace-nowrap mb-4 max-w-xs">
-                        {song.title}
-                      </h3>
-                    </div>
-                    <div className="grid grid-cols-4 gap-4 items-center">
-                      <div className="col-span-3">
-                        <p className="">{song.artist}</p>
-                        <p className="">{song.album}</p>
-                      </div>
-                      <div className="flex flex-col space-y-1 ml-auto">
-                        <div className="w-10 h-10">
-                          <AddToPlayListButton song_full_path={song.filepath} size="small" />
+                      <div className="flex items-center">
+                        {/*<img*/}
+                        {/*  src="/images/album-placeholder.png"*/}
+                        {/*  alt="album"*/}
+                        {/*  className="w-16 h-16 rounded-lg"*/}
+                        {/*/>*/}
+                      <h3 className="text-lg font-bold text-slate-400 overflow-ellipsis overflow-hidden whitespace-nowrap mb-4 max-w-xs">{song.title}</h3>
+                      <p className="">{song.artist}</p>
+                      <p className="">{song.album}</p>
                         </div>
-                        <div className="w-10 h-10">
-                          <AddRemoveFavoritesButton
-                            songPath={song.filepath}
-                            onRemove={() => setRefresh(!refresh)}
-                          />
-                        </div>
-                      </div>
                     </div>
                   </div>
-                </Link>
-              </div>
+                    </Link>
+                      <div className="flex  p-2 mt-2 gap-2">
+                      <AddToPlayListButton song_full_path={song.filepath} size="small"/>
+                      <AddRemoveFavoritesButton
+                            songPath={song.filepath}
+                            onRemove={() => setRefresh(!refresh)}
+                            size="small"
+                            />
+                      </div>
+
+
+
+                    </div>
+
+
             </Card>
           ))
         ) : (

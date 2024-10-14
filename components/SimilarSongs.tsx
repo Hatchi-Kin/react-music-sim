@@ -107,7 +107,7 @@ const SimilarSongs = () => {
                         {song.title}
                       </h3>
                       <div className="flex space-x-2 mt-4">
-                        <AddToPlayListButton song_full_path={song.path} size="medium" />
+                        <AddToPlayListButton song_full_path={song.path} size="small" />
                         <AddRemoveFavoritesButton songPath={song.path} />
                       </div>
                     </div>
