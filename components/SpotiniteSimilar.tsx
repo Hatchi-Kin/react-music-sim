@@ -92,11 +92,14 @@ const SimilarSpotiniteTracks = () => {
 
   return (
     <div className="text-white">
+      <p className="text-slate-300 mt-12 mb-2 text-center">
+        Enter the artist name and track name to find similar tracks. Click &apos;Search&apos; to get recommendations.
+      </p>
       <Card
         className="
           bg-[#111827] 
           rounded-lg 
-          mt-20 mb-12 
+          mt-4 mb-12 
           border-gray-700 
           text-slate-300 
           shadow-lg 
