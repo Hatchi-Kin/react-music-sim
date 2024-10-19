@@ -6,6 +6,7 @@ import AddRemoveFavoritesButton from "@/components/AddRemoveFavoritesButton";
 import Link from "next/link";
 import Spinner from "@/components/Spinner";
 import { Card } from "@/components/ui/card";
+import { refreshTokenFromResponse } from "@/utils/authUtils";
 
 interface UsersFavorites {
   filepath: string;
@@ -47,6 +48,7 @@ const ManageMyFavorites = () => {
             throw new Error(`Network response was not ok: ${response.statusText}`);
           }
         }
+        refreshTokenFromResponse(response);
         return response.json();
       })
       .then((data) => {

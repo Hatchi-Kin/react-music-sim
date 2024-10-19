@@ -6,6 +6,7 @@ import AddRemoveFavoritesButton from "@/components/AddRemoveFavoritesButton";
 import Image from "next/image";
 import PlotGenres from "@/components/GenresPlots";
 import Spinner from "@/components/Spinner";
+import { refreshTokenFromResponse } from "@/utils/authUtils";
 
 export interface Song {
   row: {
@@ -47,6 +48,7 @@ const RandomSongCard = () => {
             throw new Error("Network response was not ok");
           }
         }
+        refreshTokenFromResponse(response);
         return response.json();
       })
       .then((data) => {

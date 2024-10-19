@@ -4,6 +4,7 @@ import AddToPlayListButton from "../components/AddToPlayList";
 import { Card } from "@/components/ui/card";
 import { BiSkipNext, BiSkipPrevious } from "react-icons/bi";
 import { FaPlay, FaPause } from "react-icons/fa";
+import { refreshTokenFromResponse } from "@/utils/authUtils";
 
 const MusicPlayer = () => {
   const [songUrl, setSongUrl] = useState<string | null>(null);
@@ -34,6 +35,7 @@ const MusicPlayer = () => {
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);
       setSongUrl(url); 
+      refreshTokenFromResponse(response);
     }
   };
 

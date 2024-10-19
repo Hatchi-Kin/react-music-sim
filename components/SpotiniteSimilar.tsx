@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Spinner from "@/components/Spinner";
+import { refreshTokenFromResponse } from "@/utils/authUtils";
 
 interface SimilarTrack {
   "Track Name": string;
@@ -58,6 +59,7 @@ const SimilarSpotiniteTracks = () => {
             return Promise.reject(`Network response was not ok: ${response.statusText}`);
           }
         } else {
+          refreshTokenFromResponse(response);
           return response.json();
         }
       })

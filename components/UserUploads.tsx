@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Card } from "@/components/ui/card";
 import Spinner from "@/components/Spinner";
 import { Button } from "@/components/ui/button";
+import { refreshTokenFromResponse } from "@/utils/authUtils";
 
 type ExtractingState = {
   [key: string]: "loading" | "success" | null;
@@ -36,6 +37,7 @@ const UserUploadsList = () => {
             throw new Error(`Network response was not ok: ${response.statusText}`);
           }
         }
+        refreshTokenFromResponse(response);
         return response.json();
       })
       .then((data) => {

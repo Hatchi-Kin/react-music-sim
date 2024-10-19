@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import { refreshTokenFromResponse } from "@/utils/authUtils";
 
 interface PlotGenresProps {
   songPath: string;
@@ -30,6 +31,7 @@ const PlotGenres: React.FC<PlotGenresProps> = ({ songPath }) => {
             throw new Error(`Network response was not ok: ${response.statusText}`);
           }
         }
+        refreshTokenFromResponse(response);
         return response.text(); // Use text() instead of json() if the response is a plain string
       })
       .then((data) => {

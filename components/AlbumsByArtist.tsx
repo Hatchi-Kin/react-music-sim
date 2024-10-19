@@ -7,6 +7,7 @@ import { useAlbum } from "@/contexts/AlbumContext";
 import Link from "next/link";
 import Spinner from "@/components/Spinner";
 import Header from "@/components/Header";
+import { refreshTokenFromResponse } from "@/utils/authUtils";
 
 const AlbumsByArtist = () => {
   const [albums, setAlbums] = useState<string[]>([]);
@@ -40,6 +41,7 @@ const AlbumsByArtist = () => {
             throw new Error(`Network response was not ok: ${response.statusText}`);
           }
         }
+        refreshTokenFromResponse(response);
         return response.json();
       })
       .then((data) => {

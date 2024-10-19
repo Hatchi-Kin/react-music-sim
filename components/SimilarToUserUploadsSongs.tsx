@@ -5,6 +5,7 @@ import { useArtist } from "../contexts/ArtistContext";
 import AddToPlayListButton from "@/components/AddToPlayList";
 import AddRemoveFavoritesButton from "@/components/AddRemoveFavoritesButton";
 import Link from "next/link";
+import { refreshTokenFromResponse } from "@/utils/authUtils";
 
 interface Song {
   title: string;
@@ -55,6 +56,7 @@ const SimilarToUserUploadsSongs = () => {
           }
           throw new Error(`Network response was not ok: ${response.statusText}`);
         }
+        refreshTokenFromResponse(response);
         return response.json();
       })
       .then((data) => {

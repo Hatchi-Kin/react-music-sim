@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { MdFavorite } from "react-icons/md";
 import { GiBrokenHeart } from "react-icons/gi";
+import { refreshTokenFromResponse } from "@/utils/authUtils";
 
 interface AddRemoveFavoritesButtonProps {
   songPath: string;
@@ -36,6 +37,7 @@ const AddRemoveFavoritesButton: React.FC<AddRemoveFavoritesButtonProps> = ({
             throw new Error(`Network response was not ok: ${response.statusText}`);
           }
         }
+        refreshTokenFromResponse(response);
         return response.json();
       })
       .then((data) => {
@@ -70,6 +72,7 @@ const AddRemoveFavoritesButton: React.FC<AddRemoveFavoritesButtonProps> = ({
         if (!response.ok) {
           throw new Error(`Network response was not ok: ${response.statusText}`);
         }
+        refreshTokenFromResponse(response);
         return response.json();
       })
       .then((data) => {

@@ -7,6 +7,7 @@ import AddRemoveFavoritesButton from "@/components/AddRemoveFavoritesButton";
 import Link from "next/link";
 import Spinner from "@/components/Spinner";
 import Header from "@/components/Header";
+import { refreshTokenFromResponse } from "@/utils/authUtils";
 
 interface Track {
   tracknumber: number;
@@ -48,6 +49,7 @@ const TracksForAlbum = () => {
             throw new Error(`Network response was not ok: ${response.statusText}`);
           }
         }
+        refreshTokenFromResponse(response);
         return response.json();
       })
       .then((data) => {
