@@ -5,6 +5,7 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import Link from "next/link";
 import { useArtist } from "@/contexts/ArtistContext";
 import Spinner from "@/components/Spinner";
+import { refreshTokenFromResponse } from "@/utils/authUtils";
 
 const ArtistList = () => {
   const [artists, setArtists] = useState<string[]>([]);
@@ -35,6 +36,7 @@ const ArtistList = () => {
             throw new Error(`Network response was not ok: ${response.statusText}`);
           }
         }
+        refreshTokenFromResponse(response);
         return response.json();
       })
       .then((data) => {
