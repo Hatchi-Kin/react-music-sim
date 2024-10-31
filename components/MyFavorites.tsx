@@ -7,6 +7,7 @@ import Link from "next/link";
 import Spinner from "@/components/Spinner";
 import { Card } from "@/components/ui/card";
 import { refreshTokenFromResponse } from "@/utils/authUtils";
+import CompareModelButton from '@/components/CompareModelsButton';
 
 interface UsersFavorites {
   filepath: string;
@@ -17,15 +18,10 @@ interface UsersFavorites {
 
 const ManageMyFavorites = () => {
   const [songs, setSongs] = useState<UsersFavorites[]>([]);
-  const [rawResponse, setRawResponse] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [refresh, setRefresh] = useState(false);
-
+  const [error, setError] = useState<string | null>(null);
   const { songPath, setsongPath } = useSimilarSongs();
   const { artistName, setArtistName } = useArtist();
-
-  const trackName = songPath.split("/").pop()?.replace(".mp3", "") || "";
 
   const fetchMyFavorites = useCallback(() => {
     setIsLoading(true);
@@ -52,31 +48,26 @@ const ManageMyFavorites = () => {
         return response.json();
       })
       .then((data) => {
-        setRawResponse(data);
         if (Array.isArray(data)) {
           setSongs(data);
         } else {
           throw new Error("Data format is incorrect, expected an array of songs");
         }
-        setIsLoading(false);
       })
       .catch((error) => {
         console.error(error);
         setError(error.message);
+      })
+      .finally(() => {
         setIsLoading(false);
       });
   }, []);
 
   useEffect(() => {
     fetchMyFavorites();
-  }, [fetchMyFavorites, refresh]);
+  }, [fetchMyFavorites]);
 
-  if (isLoading)
-    return (
-      <div className="text-white">
-        <Spinner />
-      </div>
-    );
+  if (isLoading) return <div className="text-white"><Spinner /></div>;
   if (error) return <div className="text-white">Error: {error}</div>;
 
   return (
@@ -84,59 +75,33 @@ const ManageMyFavorites = () => {
       <div className="mt-8 p-7">
         {songs.length > 0 ? (
           songs.map((song, index) => (
-            <Card
-              key={index}
-              className="
-                flex
-                flex-col
-                bg-[#111827] 
-                rounded-lg 
-                ml-2
-                mr-2
-                border-gray-700 
-                text-slate-300 
-                shadow-lg 
-                p-4 
-                mb-4
-                h-36
-                max-w-[90%] 
-                mx-auto 
-                "
-            >
-              <div className="flex-grow relative">
-                <Link href="/homepage/similar-songs">
-                  <div
-                    className=""
-                    onClick={() => {
-                      setsongPath(song.filepath);
-                      setArtistName(song.artist);
-                    }}
-                  >
-                    <div className="flex justify-between items-center w-full">
-                      <h3 className="text-lg font-bold text-slate-400 overflow-ellipsis overflow-hidden whitespace-nowrap mb-4 max-w-xs">
-                        {song.title}
-                      </h3>
+            <Card key={index} className="flex flex-col bg-[#111827] rounded-lg m-2 border-gray-700 text-slate-300 shadow-lg p-4 mb-4 max-w-[90%] mx-auto h-auto">
+              <Link href="/homepage/similar-songs">
+                <div
+                  onClick={() => {
+                    setsongPath(song.filepath);
+                    setArtistName(song.artist);
+                  }}
+                  className="cursor-pointer"
+                >
+                  <h3 className="text-lg font-bold text-slate-400 overflow-ellipsis overflow-hidden whitespace-nowrap mb-2">
+                    {song.title}
+                  </h3>
+                  <div className="grid grid-cols-4 gap-4 items-center">
+                    <div className="col-span-3">
+                      <p className="truncate">{song.artist}</p>
+                      <p className="truncate">{song.album}</p>
                     </div>
-                    <div className="grid grid-cols-4 gap-4 items-center">
-                      <div className="col-span-3">
-                        <p className="">{song.artist}</p>
-                        <p className="">{song.album}</p>
+                    <div className="flex flex-col items-end space-y-1">
+                      <div className="flex flex-col space-y-1">
+                        <AddToPlayListButton song_full_path={song.filepath} size="small" />
+                        <AddRemoveFavoritesButton songPath={song.filepath} onRemove={() => fetchMyFavorites()} />
                       </div>
-                      <div className="flex flex-col space-y-1 ml-auto">
-                        <div className="w-10 h-10">
-                          <AddToPlayListButton song_full_path={song.filepath} size="small" />
-                        </div>
-                        <div className="w-10 h-10">
-                          <AddRemoveFavoritesButton
-                            songPath={song.filepath}
-                            onRemove={() => setRefresh(!refresh)}
-                          />
-                        </div>
-                      </div>
+                      <CompareModelButton filePath={song.filepath} label="Compare models !" />
                     </div>
                   </div>
-                </Link>
-              </div>
+                </div>
+              </Link>
             </Card>
           ))
         ) : (
