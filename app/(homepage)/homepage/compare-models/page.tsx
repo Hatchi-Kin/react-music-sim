@@ -1,10 +1,19 @@
 "use client";
 
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Header from "@/components/Header";
 import ModelComparison from "@/components/CompareModels";
 
 const CompareModelsPage: React.FC = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CompareModelsContent />
+    </Suspense>
+  );
+};
+
+const CompareModelsContent: React.FC = () => {
   const searchParams = useSearchParams();
   const file = searchParams.get("file");
 
