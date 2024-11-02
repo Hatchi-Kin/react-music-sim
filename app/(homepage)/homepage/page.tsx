@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
 import ParticleRing from "@/components/ParticuleRing";
+import MusicPlayer from "@/components/MusicPlayer";
+
 
 export default function Home() {
   const router = useRouter();
@@ -30,6 +32,10 @@ export default function Home() {
       <div className="overflow-hidden flex-grow">
         <ParticleRing />
       </div>
+      <div className="flex-grow">
+        <MusicPlayer />
+      </div>
+
     </div>
   );
 }

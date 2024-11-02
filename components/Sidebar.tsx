@@ -8,7 +8,6 @@ import { MdFavorite, MdCloudUpload } from "react-icons/md";
 import { LiaDiceD6Solid } from "react-icons/lia";
 import Box from "@/components/Box";
 import Sidebaritem from "@/components/Sidebaritem";
-import MusicPlayer from "@/components/MusicPlayer";
 
 interface SidebarProps {
   children: React.ReactNode;
@@ -61,14 +60,11 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
   return (
     <div className={"flex h-full"}>
       <div className={"hidden md:flex flex-col gap-y-2 bg-black h-full w-[300px] p-2"}>
-        <Box className={"flex flex-col gap-y-4 px-5 py-4 bg-[#111827]"}>
+        <div className={"flex flex-col gap-y-4 px-5 py-4 h-full bg-[#111827]"}>
           {routes.map((item) => (
             <Sidebaritem key={item.label} {...item} />
           ))}
-        </Box>
-        <Box className={"overflow-y-auto h-full bg-[#111827]"}>
-          <MusicPlayer />
-        </Box>
+        </div>
       </div>
       <main className={"flex-1 h-full overflow-y-auto py-2"}>{children}</main>
     </div>
