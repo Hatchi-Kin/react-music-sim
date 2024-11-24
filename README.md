@@ -1,37 +1,50 @@
 # React-Music-Sim (Next.js, React, TypeScript, TailwindCSS)
 
-React-Music-Sim is a cutting-edge music recommendation web application. It allows authenticated users to explore a vast library of songs with a modern and intuitive interface. The application utilizes a Convolutional Neural Network (CNN) to predict song genres based on their spectrograms. These vector representations of songs are stored in a Vector Database (Milvus), which powers the similarity search feature to generate personalized music recommendations. Additionally, the app includes a fully functional music player and a playlist feature for an enhanced user experience.
+React-Music-Sim est une application web de recommandation musicale de pointe. Elle permet aux utilisateurs authentifiés d'explorer une vaste bibliothèque de chansons avec une interface moderne et intuitive. L'application utilise un réseau de neurones convolutifs (CNN) pour prédire les genres musicaux en se basant sur leurs spectrogrammes. Ces représentations vectorielles des chansons sont stockées dans une base de données vectorielle (Milvus), qui alimente la fonctionnalité de recherche de similarité pour générer des recommandations musicales personnalisées. De plus, l'application inclut un lecteur de musique entièrement fonctionnel et une fonctionnalité de playlist pour une expérience utilisateur améliorée.
 
-**Note:** This project relies on a backend server, which can be found here: [megapi](https://github.com/Hatchi-Kin/megapi).
+**Note :** Ce projet repose sur un serveur backend, que vous pouvez trouver ici : [megapi](https://github.com/Hatchi-Kin/megapi).
 
+## Technologies Utilisées
 
-## Technologies Used
+- **Front-end :** React, TypeScript, TailwindCSS
+- **Build et Développement :** Next.js
 
-- **Front-end:** React, Typescript, TailwindCSS
-- **Build and Development:** Next.js
+## Installation
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`].
+### Prérequis
 
-## pour installer Next
-`npm install -g next`
-## pour creer un projet NextJS
-`npx create-next-app@latest`
-## pour ajouter shadcn
-`npx shadcn-ui@latest init`
+- Node.js
+- npm
 
-## Getting Started
+### Étapes d'installation
 
-First, run the development server:
+1. Installer Next.js globalement :
+    ```bash
+    npm install -g next
+    ```
+
+2. Créer un projet Next.js :
+    ```bash
+    npx create-next-app@latest
+    ```
+
+3. Ajouter shadcn :
+    ```bash
+    npx shadcn-ui@latest init
+    ```
+
+## Démarrage
+
+Pour démarrer le serveur de développement :
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvrez [http://localhost:3000](http://localhost:3000) avec votre navigateur pour voir le résultat.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## Project Structure
+## Structure du Projet
 
 ```bash
 .
@@ -50,7 +63,6 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 │   │   └── homepage
 │   │       ├── page.tsx
 │   │       ├── layout.tsx
-│   │       │
 │   │       ├── albumsByArtist
 │   │       ├── byartist
 │   │       ├── random-song
@@ -77,6 +89,7 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 │   ├── AllArtists.tsx
 │   ├── Box.tsx
 │   ├── Button.tsx
+│   ├── CompareModels.tsx
 │   ├── GenresPlots.tsx
 │   ├── Header.tsx
 │   ├── LandingHero.tsx
@@ -130,11 +143,10 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 └── README.md
 ```
 
-## Le workflow gh action
+## Workflow GitHub Actions
 
-pour que le server puisse ssh into gh
+Pour que le serveur puisse se connecter à GitHub via SSH, créez un fichier de configuration dans `/home/user/.ssh/config` avec le contenu suivant :
 
-creer un fichier config dans `/home/pi/.ssh/config` avec:
 ```
 Host github-megapi
 	HostName github.com 
@@ -142,5 +154,5 @@ Host github-megapi
     PreferredAuthentications publickey 
     IdentityFile ~/.ssh/id_ed25519_gh_megapi
 ```
-et une clé privée nommé `id_ed25519_gh_megapi`
-// https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh
+
+Et une clé privée nommée `id_ed25519_gh_megapi`. Pour plus d'informations, consultez la documentation GitHub : [Connecting to GitHub with SSH](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh).
