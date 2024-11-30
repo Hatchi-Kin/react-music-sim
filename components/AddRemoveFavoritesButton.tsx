@@ -50,7 +50,8 @@ const AddRemoveFavoritesButton: React.FC<AddRemoveFavoritesButtonProps> = ({
       });
   }, [songPath]);
 
-  const handleAddRemove = () => {
+  const handleAddRemove = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     const token = localStorage.getItem("authToken") ?? "";
     const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
     console.log(`Attempting to ${isFavorite ? "remove" : "add"} ${songPath}`);
@@ -88,7 +89,11 @@ const AddRemoveFavoritesButton: React.FC<AddRemoveFavoritesButtonProps> = ({
   };
 
   return (
-    <Button size="sm" onClick={handleAddRemove} className="text-slate-200 bg-[#111827]">
+    <Button
+      size="sm"
+      onClick={handleAddRemove}
+      className="text-slate-200 bg-[#111827] hover:bg-[#2b1f37] hover:scale-110 hover:shadow-lg transition-transform duration-200"
+    >
       {isFavorite ? (
         <GiBrokenHeart color="grey" size={size} />
       ) : (
